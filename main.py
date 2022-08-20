@@ -4,20 +4,17 @@ import random
 import time
 import json
 
-with open('dataset.json', 'r') as f:
-    data = json.load(f)
-
-titles = data['titles']
-
 client_id = os.environ["REDDIT_CLIENT_ID"]
 client_secret = os.environ["REDDIT_CLIENT_SECRET"]
 reddit_pass = os.environ["REDDIT_PASSWORD"]
 
-
 def get_titles():
+    with open('dataset.json', 'r') as f:
+         data = json.load(f)
+
+    titles = data['titles']
     currentlyViewingText, subscribersText = random.sample(titles, 2)
     return [currentlyViewingText, subscribersText]
-
 
 def update_titles():
     reddit = praw.Reddit(

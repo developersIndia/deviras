@@ -1,21 +1,20 @@
-
-
 {
-    "titles" : [
-               "ranting about jira",
-               "siting in a meeting", 
-               "squashing bugs", 
-               "centering divs", 
-               "waiting for staging deployment",
-               "writing tests",
-               "pushing directly to prod",
-               "doing code review", 
-               "deleting jira tickets", 
-               "Creating a pull request",
-               "forgot to run DB migrations", 
-               "Broke production", 
-               "running on staging ENV", 
-               "merging git branches", 
-               "releasing the MVP", "finding JIRA tickets"
-            ]
+    "titles": [
+        "ranting about jira",
+        "siting in a meeting",
+        "squashing bugs",
+        "centering divs",
+        "waiting for staging deployment",
+        "writing tests",
+        "pushing directly to prod",
+        "doing code review",
+        "deleting jira tickets",
+        "Creating a pull request",
+        "forgot to run DB migrations",
+        "Broke production",
+        "running on staging ENV",
+        "merging git branches",
+        "releasing the MVP",
+        "finding JIRA tickets"
+    ]
 }

@@ -1,0 +1,46 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "SameerSahu007",
+      "name": "Sameer Sahu",
+      "avatar_url": "https://avatars.githubusercontent.com/u/29480670?v=4",
+      "profile": "https://github.com/SameerSahu007",
+      "contributions": [
+        "code",
+        "audio",
+        "a11y",
+        "projectManagement",
+        "business",
+        "blog",
+        "data",
+        "test",
+        "doc",
+        "design",
+        "example",
+        "financial",
+        "ideas",
+        "tool",
+        "maintenance",
+        "mentoring",
+        "platform",
+        "plugin",
+        "question",
+        "security",
+        "content",
+        "tutorial",
+        "video"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "deviras",
+  "projectOwner": "developersIndia",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}

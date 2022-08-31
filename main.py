@@ -1,3 +1,7 @@
+'''
+    This script is used for changing the text below total members & live
+    members count in the developersIndia subreddit
+'''
 import praw
 import os
 import random
@@ -10,7 +14,7 @@ reddit_pass = os.environ["REDDIT_PASSWORD"]
 
 def get_titles():
     with open('dataset.json', 'r') as f:
-         data = json.load(f)
+        data = json.load(f)
 
     titles = data['titles']
     currentlyViewingText, subscribersText = random.sample(titles, 2)
@@ -38,5 +42,5 @@ def update_titles():
     widgets.refresh()
     widgets.id_card.mod.update(subscribersText=titles[1])
 
-
-update_titles()
+if __name__ == '__main__':
+    update_titles()

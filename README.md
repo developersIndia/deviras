@@ -13,6 +13,13 @@
 
      ![r/developersIndia About widget](https://user-images.githubusercontent.com/34342551/185678556-e4c911c9-fb12-49da-9ca6-8f8ce2ad9b5a.png)
 
+## Tests
+
+To run the tests, simply run the following command in the Python virtual environment:
+
+```bash
+$ python -m unittest
+```
 
 ## Resources
 

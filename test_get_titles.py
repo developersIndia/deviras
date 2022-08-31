@@ -13,8 +13,7 @@ environ_patcher.start()
 
 from main import get_titles
 
-# NOTE: not sure about how exactly update_titles can be tested
-class TestTitlesUpdater(unittest.TestCase):
+class TestGetTitles(unittest.TestCase):
     @patch('main.json.load', return_value={'titles': ['foo', 'bar', 'baz']})
     def test_get_titles_returns_a_list(self, _):
         titles = get_titles()

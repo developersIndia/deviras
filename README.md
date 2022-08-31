@@ -8,20 +8,38 @@
 
 ## Scripts
 
-1. [main.py](https://github.com/developersIndia/deviras/blob/main/main.py)
-   - Used for changing the text below total members & live members count in a subreddit
+### [main.py](https://github.com/developersIndia/deviras/blob/main/main.py)
+ 
+Used for changing the text below total members & live members count in a subreddit.
 
-     ![r/developersIndia About widget](https://user-images.githubusercontent.com/34342551/185678556-e4c911c9-fb12-49da-9ca6-8f8ce2ad9b5a.png)
+![r/developersIndia About widget](https://user-images.githubusercontent.com/34342551/185678556-e4c911c9-fb12-49da-9ca6-8f8ce2ad9b5a.png)
 
-## Tests
+## Setup
 
-To run the tests, simply run the following command in the Python virtual environment:
+1. Clone the repo
 
-```bash
-$ python -m unittest
-```
+   ```bash
+   git clone https://github.com/developersIndia/deviras.git
+   ```
+2. Initialise a virtual environment.
 
-## Resources
+   ```bash
+   cd deviras
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+3. Install dependencies
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. To run the tests, use the following command in a python virtual environment:
+
+   ```bash
+   python -m unittest
+   ```
+
+## Resources & Learning Material
 
 - [PRAW Docs](https://praw.readthedocs.io/en/stable/code_overview/other/idcard.html)
 

@@ -1,5 +1,6 @@
 import unittest
 from unittest.mock import patch
+from main import get_titles
 
 # patch out the environ dictionary
 # used to instantiate global variables in the titles_updater script
@@ -10,8 +11,6 @@ environ_patcher = patch.dict('os.environ', {
     'REDDIT_PASSWORD': ''
 })
 environ_patcher.start()
-
-from main import get_titles
 
 class TestGetTitles(unittest.TestCase):
     @patch('main.json.load', return_value={'titles': ['foo', 'bar', 'baz']})

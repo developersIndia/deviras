@@ -9,7 +9,7 @@
 
 ## Scripts
 
-### [main.py](https://github.com/developersIndia/deviras/blob/main/main.py)
+### [idcard_update](https://github.com/developersIndia/deviras/blob/idcard_update)
  
 Used for changing the text below total members & live members count in a subreddit.
 

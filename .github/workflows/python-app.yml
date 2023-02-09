@@ -30,6 +30,10 @@ jobs:
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Test Community IDCard Update
+      env:
+        REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+        REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+        REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
       run: |
         cd idcard_update
         python -m unittest

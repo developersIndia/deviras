@@ -13,7 +13,7 @@ client_secret = os.environ["REDDIT_CLIENT_SECRET"]
 reddit_pass = os.environ["REDDIT_PASSWORD"]
 
 def get_titles():
-    with open('idcard_update/dataset.json', 'r') as f:
+    with open('dataset.json', 'r') as f:
         data = json.load(f)
 
     titles = data['titles']

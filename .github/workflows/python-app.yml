@@ -43,4 +43,5 @@ jobs:
         REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
         REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
       run: |
-        python idcard_update/main.py
+        cd idcard_update
+        python main.py

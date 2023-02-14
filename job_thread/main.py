@@ -1,7 +1,10 @@
 import logging
 import sqlite3
+from dataclasses import dataclass
 from os import environ
 from time import time
+
+import feedparser
 import praw
 
 SECONDS_IN_WEEK = 60 * 60 * 24 * 7
@@ -28,6 +31,7 @@ Stay tuned for updates on the latest job openings, and apply for the ones that i
     REDDIT_PASSWORD = environ["REDDIT_PASSWORD"]
     USERNAME = environ["REDDIT_USERNAME"]
     USER_AGENT = f"u/{USERNAME} Job Board"
+    FEED_URL = "https://developersindia.in/?feed=job_feed"
 
 
 class Database:
@@ -58,6 +62,36 @@ class Database:
                 "INSERT INTO Posts (post_id, time) VALUES ((?), (?))",
                 (post_id, timestamp),
             )
+
+
+@dataclass
+class Job:
+    post_id: str  # Used for deduplication
+    title: str
+    company_name: str
+    location: str
+    job_type: str
+    salary: str
+    summary: str
+    permalink: str
+
+
+def get_job_entries(feed_url):
+    entries = feedparser.parse(feed_url).entries
+
+    return [
+        Job(
+            post_id=entry["post-id"],
+            title=entry["title"],
+            company_name=entry["job_listing_company"],
+            location=entry.get("job_listing_location", "N/A"),
+            job_type=entry["job_listing_job_type"],
+            salary=entry.get("job_listing_salary", "N/A"),
+            summary=entry["summary"],
+            permalink=entry["link"],
+        )
+        for entry in entries
+    ]
 
 
 def should_create_new_post(latest_post):

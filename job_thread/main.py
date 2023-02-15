@@ -48,7 +48,7 @@ def dict_raise_or_set(d, key, value):
     d[key] = value
 
 
-class Database:
+class DB:
     POSTS = "postid_epoch"
     COMMENTS = "jobid_commentid"
 
@@ -89,14 +89,14 @@ class Database:
 
     def _create(self):
         with self:
-            self._db.setdefault(self.POSTS, {})
-            self._db.setdefault(self.COMMENTS, {})
+            self._db.setdefault(DB.POSTS, {})
+            self._db.setdefault(DB.COMMENTS, {})
 
     def get_latest_post(self) -> Post | None:
         # {"id": 1234, "id2": "5678"} -> ("id2", "5678") (Descending)
         try:
             result = sorted(
-                self._db[self.POSTS].items(),
+                self._db[DB.POSTS].items(),
                 key=lambda item: item[1],
                 reverse=True,
             )[0]
@@ -107,7 +107,14 @@ class Database:
 
     def insert_post(self, post: Post):
         with self:
-            dict_raise_or_set(self._db[self.POSTS], post.post_id, post.epoch)
+            dict_raise_or_set(self._db[DB.POSTS], post.post_id, post.epoch)
+
+    def insert_comment(self, feed_job_id: str, comment_id: str):
+        with self:
+            dict_raise_or_set(self._db[DB.COMMENTS], feed_job_id, comment_id)
+
+    def is_job_posted(self, feed_job_id: str):
+        return self._db[DB.COMMENTS].get(feed_job_id) is not None
 
 
 @dataclass
@@ -169,7 +176,7 @@ def create_job_post(subreddit) -> Post:
 def main():
     logging.root.setLevel(logging.INFO)
 
-    db = Database(Config.DB_PATH)
+    db = DB(Config.DB_PATH)
     reddit = praw.Reddit(
         client_id=Config.CLIENT_ID,
         client_secret=Config.CLIENT_SECRET,
@@ -205,6 +212,34 @@ def main():
     submission = reddit.submission(db.get_latest_post().post_id)
 
     logging.info(f"Fetched latest submission {submission.id}")
+
+    for job in get_job_entries(Config.FEED_URL):
+        if db.is_job_posted(job.post_id):
+            logging.warning(
+                f"Ignoring already posted job with post ID {job.post_id}"
+            )
+            continue
+
+        comment_text = f"""\
+[**{job.title}** - {job.company_name}]({job.permalink})
+
+**Salary:** {job.salary}
+
+**Location:** {job.location}
+
+**Job Type:** {job.job_type}
+
+### Summary
+
+{job.summary}\
+"""
+
+        comment = submission.reply(comment_text)
+        db.insert_comment(job.post_id, comment.id)
+
+        logging.info(
+            f"Posted job with post ID {job.post_id} as reddit comment {comment.id}"
+        )
 
 
 if __name__ == "__main__":

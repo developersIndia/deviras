@@ -1,5 +1,6 @@
 import json
 import logging
+import re
 from copy import deepcopy
 from dataclasses import dataclass
 from os import environ, fsync
@@ -129,6 +130,10 @@ class Job:
     permalink: str
 
 
+def strip_html(text):
+    return re.sub("<[^<]+?>", "", text)
+
+
 def get_job_entries(feed_url):
     entries = feedparser.parse(feed_url).entries
 
@@ -140,7 +145,7 @@ def get_job_entries(feed_url):
             location=entry.get("job_listing_location", "N/A"),
             job_type=entry["job_listing_job_type"],
             salary=entry.get("job_listing_salary", "N/A"),
-            summary=entry["summary"],
+            summary=strip_html(entry["summary"]),
             permalink=entry["link"],
         )
         for entry in entries

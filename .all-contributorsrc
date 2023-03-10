@@ -32,6 +32,15 @@
         "code",
         "test"
       ]
+    },
+    {
+      "login": "git-bruh",
+      "name": "Pratham",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67585967?v=4",
+      "profile": "https://pratham.cc",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -39,5 +48,6 @@
   "projectOwner": "developersIndia",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "angular"
 }

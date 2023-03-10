@@ -4,20 +4,22 @@ import re
 from copy import deepcopy
 from dataclasses import dataclass
 from os import environ, fsync
-from time import time
+from time import strftime, time
 
 import feedparser
 import praw
 
 SECONDS_IN_WEEK = 60 * 60 * 24 * 7
 
+# Date Month, Year
+STRFTIME_FORMAT = "%d %B, %Y"
 
 class Config:
     DB_PATH = "db.json"
     SUBREDDIT = "developersindia"
 
     POST_FLAIR = "Hiring"
-    POST_TITLE = "Don't Miss Out on These Job Opportunities | Weekly Job Openings Thread"
+    POST_TITLE = f"Don't Miss Out on These Job Opportunities | Weekly Job Openings Thread | {strftime(STRFTIME_FORMAT)}"
     POST_TEXT = """\
 This thread has all the latest job openings that haven't been posted on previous weekly threads.
 

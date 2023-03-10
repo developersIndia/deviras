@@ -52,11 +52,14 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
-  <tr>
-    <td align="center"><a href="https://github.com/SameerSahu007"><img src="https://avatars.githubusercontent.com/u/29480670?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sameer Sahu</b></sub></a><br /><a href="https://github.com/developersIndia/deviras/commits?author=SameerSahu007" title="Code">💻</a></td>
-    <td align="center"><a href="http://pavanjadhaw.me"><img src="https://avatars.githubusercontent.com/u/26551780?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Pavan Jadhaw</b></sub></a><br /><a href="#ideas-pavanjadhaw" title="Ideas, Planning, & Feedback">🤔</a></td>
-    <td align="center"><a href="https://animesh-ghosh.github.io/"><img src="https://avatars.githubusercontent.com/u/34956994?v=4?s=100" width="100px;" alt=""/><br /><sub><b>MaDDogx</b></sub></a><br /><a href="https://github.com/developersIndia/deviras/commits?author=Animesh-Ghosh" title="Code">💻</a> <a href="https://github.com/developersIndia/deviras/commits?author=Animesh-Ghosh" title="Tests">⚠️</a></td>
-  </tr>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/SameerSahu007"><img src="https://avatars.githubusercontent.com/u/29480670?v=4?s=100" width="100px;" alt="Sameer Sahu"/><br /><sub><b>Sameer Sahu</b></sub></a><br /><a href="https://github.com/developersIndia/deviras/commits?author=SameerSahu007" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://pavanjadhaw.me"><img src="https://avatars.githubusercontent.com/u/26551780?v=4?s=100" width="100px;" alt="Pavan Jadhaw"/><br /><sub><b>Pavan Jadhaw</b></sub></a><br /><a href="#ideas-pavanjadhaw" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://animesh-ghosh.github.io/"><img src="https://avatars.githubusercontent.com/u/34956994?v=4?s=100" width="100px;" alt="MaDDogx"/><br /><sub><b>MaDDogx</b></sub></a><br /><a href="https://github.com/developersIndia/deviras/commits?author=Animesh-Ghosh" title="Code">💻</a> <a href="https://github.com/developersIndia/deviras/commits?author=Animesh-Ghosh" title="Tests">⚠️</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://pratham.cc"><img src="https://avatars.githubusercontent.com/u/67585967?v=4?s=100" width="100px;" alt="Pratham"/><br /><sub><b>Pratham</b></sub></a><br /><a href="https://github.com/developersIndia/deviras/commits?author=git-bruh" title="Code">💻</a></td>
+    </tr>
+  </tbody>
 </table>
 
 <!-- markdownlint-restore -->

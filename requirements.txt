@@ -1,2 +1,4 @@
 praw
 feedparser
+pyyaml
+ruamel.yaml

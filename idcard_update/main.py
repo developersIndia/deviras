@@ -25,8 +25,8 @@ def update_titles():
         client_id=client_id,
         client_secret=client_secret,
         password=reddit_pass,
-        user_agent="testscript by u/BhupeshV",
-        username="BhupeshV",
+        user_agent="Update Titles by u/devsIndiaBot",
+        username="devsIndiaBot",
     )
     widgets = reddit.subreddit("developersIndia").widgets
     id_card = widgets.id_card

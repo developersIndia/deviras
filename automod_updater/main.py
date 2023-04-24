@@ -53,4 +53,9 @@ for yaml_text in yaml_sections:
 
 for rule in rules:
     for key, value in rule.items():
-        print("rule name: ", key)
+        if key == "New post comment":
+            rule[key]["comment"] = "This is a test comment"
+            new_content = ruamel.yaml.dump(rule[key], Dumper=ruamel.yaml.RoundTripDumper)
+            print(new_content)
+    # TODO: Update the wiki page with the new content
+

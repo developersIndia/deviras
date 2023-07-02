@@ -1,14 +1,15 @@
 name: r/developersIndia titles updater
 
 on:
-  schedule:
+#   schedule:
     # At 19:30 on every 2nd day-of-week.” 
-    - cron:  '30 19 * * */2'
+#     - cron:  '30 19 * * */2'
+#   workflow_dispatch:
+#   push:
+#     branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
   workflow_dispatch:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 permissions:
   contents: read

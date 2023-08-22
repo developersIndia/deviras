@@ -14,6 +14,10 @@ SECONDS_IN_WEEK = 60 * 60 * 24 * 7
 # Date Month, Year
 STRFTIME_FORMAT = "%d %B, %Y"
 
+import ssl
+if hasattr(ssl, '_create_unverified_context'):
+    ssl._create_default_https_context = ssl._create_unverified_context
+
 class Config:
     DB_PATH = "db.json"
     SUBREDDIT = "developersindia"

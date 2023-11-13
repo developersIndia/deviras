@@ -8,10 +8,12 @@ reddit_pass = os.environ["REDDIT_PASSWORD"]
 username = os.environ["REDDIT_USERNAME"]
 user_agent = 'AdventOfCode Leaderboard Updater (by https://github.com/ni5arga/)'
 aoc_session_cookie = os.environ["AOC_SESSION_COOKIE"]
-aoc_url = 'https://adventofcode.com/{}/leaderboard/private/view/{}'.format(2023, 'YOUR_LEADERBOARD_CODE')
+aoc_leaderboard_code = os.environ["AOC_LEADERBOARD_CODE"]
+
+aoc_url = f'https://adventofcode.com/{{year}}/leaderboard/private/view/{aoc_leaderboard_code}'
 
 def get_leaderboard_data():
-    response = requests.get(aoc_url, cookies={'session': aoc_session_cookie})
+    response = requests.get(aoc_url.format(year=2023), cookies={'session': aoc_session_cookie})
     data = response.json()
     return data
 
@@ -24,6 +26,8 @@ def format_leaderboard(data):
     # Include only the top 10 players
     for i, member_data in enumerate(sorted_members[:10]):
         leaderboard_stats += f"{i + 1}. {member_data['name']} - Stars: {member_data['stars']} | Score: {member_data['local_score']}\n"
+
+    leaderboard_stats += f"\n[Advent of Code Leaderboard](https://adventofcode.com/2023/leaderboard/private/view/{aoc_leaderboard_code})\n"
 
     return leaderboard_stats
 

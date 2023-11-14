@@ -39,7 +39,7 @@
    - Copy the value of the `session` cookie. It is usually a long hex string of letters and numbers.
 
 9. **Use the Session Cookie:**
-   - Paste the copied session cookie value into the appropriate environment variable (`AOC_SESSION_COOKIE` in your case) in your code or set it as an environment variable. 
+   - Paste the copied session cookie value into the appropriate environment variable (`AOC_SESSION_COOKIE` in this case) in your code or set it as an environment variable. 
 
 ![session-cookie](https://github.com/ni5arga/deviras/blob/main/aoc/cookie.png?raw=true)
 

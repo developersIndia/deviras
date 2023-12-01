@@ -11,7 +11,7 @@ aoc_session_cookie = os.environ["AOC_SESSION_COOKIE"]
 aoc_leaderboard_code = os.environ["AOC_LEADERBOARD_CODE"]
 reddit_post_id = os.environ.get("REDDIT_POST_ID")
 
-aoc_url = f'https://adventofcode.com/{{year}}/leaderboard/private/view/{aoc_leaderboard_code}'
+aoc_url = f'https://adventofcode.com/{{year}}/leaderboard/private/view/{aoc_leaderboard_code}.json'
 
 def get_leaderboard_data():
     response = requests.get(aoc_url.format(year=2023), cookies={'session': aoc_session_cookie})
@@ -19,16 +19,16 @@ def get_leaderboard_data():
     return data
 
 def format_leaderboard(data, num_players=20):
-    leaderboard_stats = "r/DevelopersIndia Advent of Code Leaderboard Stats\n\n"
-    leaderboard_stats += "| Rank | Player | Stars |\n"
-    leaderboard_stats += "|------|--------|-------|\n"
+    leaderboard_stats = "r/developersIndia Advent of Code Leaderboard Stats\n\n"
+    leaderboard_stats += "| Rank | Player | Stars | Score |\n"
+    leaderboard_stats += "|------|--------|-------|-------|\n"
 
     # Sort members by stars in descending order
     sorted_members = sorted(data['members'].values(), key=lambda x: x['stars'], reverse=True)
 
     # Include only the top players
     for i, member_data in enumerate(sorted_members[:num_players]):
-        leaderboard_stats += f"| {i + 1} | {member_data['name']} | {member_data['stars']} |\n"
+        leaderboard_stats += f"| {i + 1} | {member_data['name']} | {member_data['stars']} | {member_data['local_score']} |\n"
 
     leaderboard_stats += f"\n[Advent of Code Leaderboard](https://adventofcode.com/2023/leaderboard/private/view/{aoc_leaderboard_code})\n"
 

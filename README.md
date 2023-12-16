@@ -13,7 +13,14 @@
  
 Used for changing the text below total members & live members count in a subreddit.
 
-![r/developersIndia About widget](https://user-images.githubusercontent.com/34342551/185678556-e4c911c9-fb12-49da-9ca6-8f8ce2ad9b5a.png)
+### [aoc](https://github.com/developersIndia/deviras/blob/aoc)
+
+Used for updating the Advent of Code leaderboard in the [post](https://www.reddit.com/r/developersIndia/comments/1889ar3/advent_of_code_rdevelopersindia_leaderboard_year/).
+
+### [job_thread](https://github.com/developersIndia/deviras/blob/job_thread)
+
+Used for creating [hiring threads](https://www.reddit.com/r/developersIndia/?f=flair_name%3A%22Hiring%22) in the subreddit that gets the job from our [job board](https://developersindia.in/job-board/).
+
 
 ## Setup
 
@@ -40,9 +47,6 @@ Used for changing the text below total members & live members count in a subredd
    python -m unittest
    ```
 
-## Resources & Learning Material
-
-- [PRAW Docs](https://praw.readthedocs.io/en/stable/code_overview/other/idcard.html)
 
 ## Contributors ✨
 

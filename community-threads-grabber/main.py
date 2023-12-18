@@ -8,7 +8,7 @@ client_id = os.environ["REDDIT_CLIENT_ID"]
 client_secret = os.environ["REDDIT_CLIENT_SECRET"]
 reddit_pass = os.environ["REDDIT_PASSWORD"]
 username = os.environ["REDDIT_USERNAME"]
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["GIST_TOKEN"]
 gist_id = os.environ["GIST_ID"]
 sub = "developersIndia"
 

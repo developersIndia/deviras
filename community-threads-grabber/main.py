@@ -137,7 +137,7 @@ def main():
         print("Internal database updated successfully!")
         update_wiki(reddit, "community-threads", posts)
     else:
-        print("Collection Saved data is up to date!")
+        print("Wiki is up to date!")
 
 
 if __name__ == "__main__":

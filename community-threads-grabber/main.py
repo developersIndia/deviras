@@ -14,7 +14,6 @@ sub = "developersIndia"
 
 
 def get_gist_content(gist_id):
-    token = os.environ["GITHUB_TOKEN"]
     headers = {
         "Authorization": f"token {token}",
         "Accept": "application/vnd.github.v3+json",
@@ -26,7 +25,6 @@ def get_gist_content(gist_id):
 
 
 def update_gist(gist_id, filename, content, description=""):
-    token = os.environ["GITHUB_TOKEN"]
     headers = {
         "Authorization": f"token {token}",
         "Accept": "application/vnd.github.v3+json",

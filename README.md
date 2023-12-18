@@ -17,6 +17,10 @@ Used for changing the text below total members & live members count in a subredd
 
 Used for updating the Advent of Code leaderboard in the [post](https://www.reddit.com/r/developersIndia/comments/1889ar3/advent_of_code_rdevelopersindia_leaderboard_year/).
 
+### [community-threads-grabber](https://github.com/developersIndia/deviras/tree/main/community-threads-grabber)
+
+Used for grabbing the posts from [community threads collection](https://www.reddit.com/r/developersIndia/collection/958aef35-f9cb-414d-ab33-08bc639e47de/) and updating the [wiki](https://www.reddit.com/r/developersIndia/wiki/community-threads/).
+
 ### [job_thread](https://github.com/developersIndia/deviras/blob/job_thread)
 
 Used for creating [hiring threads](https://www.reddit.com/r/developersIndia/?f=flair_name%3A%22Hiring%22) in the subreddit that gets the job from our [job board](https://developersindia.in/job-board/).

@@ -29,6 +29,27 @@ def get_flair_template_from_text(reddit, flair_text):
             return template
 
 
+def send_message(reddit, username, flair_text):
+    message_subject = 'Woohoo! You are now a verified member of r/developersIndia! 🚀'
+    message_text = """
+Hi there,\n
+As requested your user-flair has now been updated to a verified version. You now have the **{flair}** flair on r/developersIndia ✨\n
+
+This means that you are now a trusted member of the community and we hope that you will continue to contribute to the community in a positive way. \n
+
+As a reminder,\n
+- Make sure to follow [Code of Conduct](https://developersindia.in/code-of-conduct/) before participating in discussions.
+- Go through [rules](https://www.reddit.com/r/developersIndia/wiki/community-rules/) before creating a new post.\n
+If you know someone who is active on r/developersIndia, please send them this [wiki on how to get verified](https://www.reddit.com/r/developersIndia/wiki/verified-flair)\n
+
+\n\n
+PS: This was an automated messaage, no need to reply. [Reach out to mods](https://www.reddit.com/message/compose?to=/r/developersIndia) if you have any questions.
+
+Namaste 🙏
+"""
+    reddit.redditor(username).message(subject=message_subject, message=message_text.format(flair=flair_text))
+
+
 def main():
     reddit = praw.Reddit(
         client_id=client_id,
@@ -48,6 +69,7 @@ def main():
     flair_text = sys.argv[2]
 
     assign_user_flair(reddit, reddit_username, flair_text)
+    # send_message(reddit, reddit_username)
 
 
 if __name__ == "__main__":

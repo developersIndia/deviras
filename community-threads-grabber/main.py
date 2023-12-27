@@ -55,8 +55,13 @@ def update_wiki(reddit, wikipage, posts):
     for year in posts_by_year:
         posts_by_year[year] = sorted(posts_by_year[year], key=lambda k: k['created_at'], reverse=True)
 
+    # Calculate total posts and years
+    total_posts = sum(len(posts) for posts in posts_by_year.values())
+    total_years = len(posts_by_year)
+
     wiki_header = """# A collection of must read discussions started by community members"""
     content = wiki_header + "\n\n"
+    content += f"This collection contains a list of `{total_posts}` handpicked posts across `{total_years}` years.\n\n"
 
     for year in sorted(posts_by_year.keys(), reverse=True):
         content += f"## {year}\n\n"

@@ -2,6 +2,7 @@ import praw
 import os
 from datetime import datetime
 import json
+from collections import defaultdict 
 import requests
 
 client_id = os.environ["REDDIT_CLIENT_ID"]
@@ -44,15 +45,28 @@ def get_collection(reddit):
 
 
 def update_wiki(reddit, wikipage, posts):
-    wiki_header = """# A collection of good discussions started by community members"""
+    # Group posts by year
+    posts_by_year = defaultdict(list)
+    for post in posts:
+        year = datetime.strptime(post['created_at'], '%Y-%m-%dT%H:%M:%S').year
+        posts_by_year[year].append(post)
+
+    # Sort posts within each year
+    for year in posts_by_year:
+        posts_by_year[year] = sorted(posts_by_year[year], key=lambda k: k['created_at'], reverse=True)
+
+    wiki_header = """# A collection of must read discussions started by community members"""
     content = wiki_header + "\n\n"
+
+    for year in sorted(posts_by_year.keys(), reverse=True):
+        content += f"## {year}\n\n"
+        # Add the posts for this year
+        for post in posts_by_year[year]:
+            formatted_date = datetime.strptime(post['created_at'], '%Y-%m-%dT%H:%M:%S').strftime('%d-%m-%Y')
+            content += f"- `{formatted_date}` [{post['title']}]({post['url']})\n\n"
+    
     # given a wiki link, update the wiki page with new markdown
     wikipage = reddit.subreddit(sub).wiki[wikipage]
-
-    for post in posts:
-        formatted_date = datetime.strptime(post['created_at'], '%Y-%m-%dT%H:%M:%S').strftime('%d-%m-%Y')
-        content += f"- `{formatted_date}` [{post['title']}]({post['url']})\n\n"
-    
     wikipage.edit(content=content)
     print("Wiki updated successfully!")
 

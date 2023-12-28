@@ -28,7 +28,9 @@ def format_leaderboard(data, num_players=100):
 
     # Include only the top players
     for i, member_data in enumerate(sorted_members[:num_players]):
-        leaderboard_stats += f"| {i + 1} | {member_data['name']} | {member_data['stars']} | {member_data['local_score']} |\n"
+        # check for non-zero local_score
+        if member_data['local_score'] > 0:
+            leaderboard_stats += f"| {i + 1} | {member_data['name']} | {member_data['stars']} | {member_data['local_score']} |\n"
 
     leaderboard_stats += f"\n[Advent of Code Leaderboard](https://adventofcode.com/2023/leaderboard/private/view/{aoc_leaderboard_code})\n"
     leaderboard_stats += f"\nUpdated every 24 hours"

@@ -31,5 +31,5 @@ jobs:
             GIST_ID: ${{ secrets.GIST_ID }}
             GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
           run: |
-            cd community-threads-grabber
+            cd community-threads
             python main.py

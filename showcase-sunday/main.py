@@ -21,12 +21,12 @@ def is_second_sunday():
 def create_showcase_sunday_megathread(subreddit):
     flair = next(
         filter(
-            lambda flair: flair["flair_text"] == "Showcase Sunday",
+            lambda flair: "Showcase Sunday" in flair["flair_text"],
             subreddit.flair.link_templates.user_selectable(),
         )
     )
        
-    title = "Showcase Sunday Megathread - {month} {year}".format(month=datetime.date.today().strftime("%B"), year=datetime.date.today().year)
+    title = "Showcase Sunday Megathread - {month}, {year}".format(month=datetime.date.today().strftime("%B"), year=datetime.date.today().year)
     text = """
 It's time for our monthly showcase thread where we celebrate the incredible talent in our community. Whether it's an app, a website, a tool, or anything else you've built, we want to see it! Share your latest creations, side projects, or even your work-in-progress.
 
@@ -38,7 +38,9 @@ Let's inspire each other and celebrate the diverse skills we have. Comment below
         selftext=text,
         flair_id=flair["flair_template_id"],
     )
+    submission.mod.approve()
     submission.mod.sticky()
+    submission.mod.distinguish()
 
     return submission
 
@@ -55,6 +57,9 @@ def main():
 
     if is_second_sunday():
         create_showcase_sunday_megathread(subreddit)
+        print("Showcase Sunday Megathread created successfully!")
+    else:
+        print("Skipping. Not the second Sunday of the month")
 
 if __name__ == "__main__":
     main()

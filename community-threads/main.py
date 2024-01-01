@@ -61,13 +61,13 @@ def update_wiki(reddit, wikipage, posts):
 
     wiki_header = """# A collection of must read discussions started by community members"""
     content = wiki_header + "\n\n"
-    content += f"A handpicked collection of **{total_posts}** quality threads across {total_years} years.\n\n"
+    content += f"A handpicked collection of **{total_posts}** interesting posts, discusions & high-quality threads gathered over a {total_years} year period.\n\n"
 
     for year in sorted(posts_by_year.keys(), reverse=True):
         content += f"## {year}\n\n"
         # Add the posts for this year
         for post in posts_by_year[year]:
-            formatted_date = datetime.strptime(post['created_at'], '%Y-%m-%dT%H:%M:%S').strftime('%d-%m-%Y')
+            formatted_date = datetime.strptime(post['created_at'], '%Y-%m-%dT%H:%M:%S').strftime('%d %b, %Y')
             content += f"- `{formatted_date}` [`{post['title']}`]({post['url']})\n\n"
     
     # given a wiki link, update the wiki page with new markdown

@@ -1,6 +1,6 @@
 # deviras
 
-> Bunch of scripts to automate stuff around the r/developersIndia.
+> Bunch of scripts to automate stuff in r/developersIndia.
 
 
 [![Discord](https://img.shields.io/discord/669880381649977354?color=%237289da&label=Discord&logo=Discord)](https://discordapp.com/invite/MKXMSNC)

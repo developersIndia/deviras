@@ -1,6 +1,6 @@
 # deviras
 
-> Bunch of scripts to automate stuff around the developersIndia subreddit
+> Bunch of scripts to automate stuff around the r/developersIndia.
 
 
 [![Discord](https://img.shields.io/discord/669880381649977354?color=%237289da&label=Discord&logo=Discord)](https://discordapp.com/invite/MKXMSNC)
@@ -10,22 +10,29 @@
 
 ## Scripts
 
-### [idcard_update](https://github.com/developersIndia/deviras/blob/idcard_update)
+### [idcard_update](https://github.com/developersIndia/deviras/blob/main/idcard_update/main.py)
  
-Used for changing the text below total members & live members count in a subreddit.
+- Used for changing the text below _total members_ & _live members_ count on the Subreddit.
+- ![action build](https://github.com/developersIndia/deviras/actions/workflows/titles-updater.yml/badge.svg)
 
-### [aoc](https://github.com/developersIndia/deviras/blob/aoc)
+### [aoc](https://github.com/developersIndia/deviras/blob/main/aoc/main.py)
 
-Used for updating the Advent of Code leaderboard in the [post](https://www.reddit.com/r/developersIndia/comments/1889ar3/advent_of_code_rdevelopersindia_leaderboard_year/).
+- Used for updating the Advent of Code User Scores in the [leaderboard post](https://www.reddit.com/r/developersIndia/comments/1889ar3/advent_of_code_rdevelopersindia_leaderboard_year/).
+- ![action build](https://github.com/developersIndia/deviras/actions/workflows/aoc.yml/badge.svg)
 
-### [community-threads](https://github.com/developersIndia/deviras/tree/main/community-threads)
+### [community-threads](https://github.com/developersIndia/deviras/blob/main/community-threads/main.py)
 
-Used for grabbing the posts from [community threads collection](https://www.reddit.com/r/developersIndia/collection/958aef35-f9cb-414d-ab33-08bc639e47de/) and adding it to the [wiki](https://www.reddit.com/r/developersIndia/wiki/community-threads/).
+- Used for grabbing the posts from [community threads collection](https://www.reddit.com/r/developersIndia/collection/958aef35-f9cb-414d-ab33-08bc639e47de/) and adding it to the [wiki](https://www.reddit.com/r/developersIndia/wiki/community-threads/).
+- ![action build](https://github.com/developersIndia/deviras/actions/workflows/collection-thread-updater.yml/badge.svg)
 
-### [job_thread](https://github.com/developersIndia/deviras/blob/job_thread)
+### [job_thread](https://github.com/developersIndia/deviras/blob/main/job_thread/main.py)
 
 Used for creating [hiring threads](https://www.reddit.com/r/developersIndia/?f=flair_name%3A%22Hiring%22) in the subreddit that gets the job from our [job board](https://developersindia.in/job-board/).
 
+### [showcase-sunday](https://github.com/developersIndia/deviras/blob/main/showcase-sunday/main.py)
+
+- Used for creating [Showcase Sunday Megathreads](https://www.reddit.com/r/developersIndia/search/?q=flair%3A%20Showcase%20Sunday&restrict_sr=1) posts in the subreddit.
+- ![action build](https://github.com/developersIndia/deviras/actions/workflows/showcase-sunday.yml/badge.svg)
 
 ## Setup
 

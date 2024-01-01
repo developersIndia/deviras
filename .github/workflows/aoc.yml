@@ -1,9 +1,9 @@
-name : r/developersIndia AoC leaderboard
+name : AoC leaderboard
 
 on:
-    schedule:
+    # schedule:
         # Every 2 hours” 
-        - cron: '0 */2 * * *'
+        # - cron: '0 */2 * * *'
     workflow_dispatch:
 
 permissions:

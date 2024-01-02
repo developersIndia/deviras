@@ -61,7 +61,7 @@ def update_wiki(reddit, wikipage, posts):
 
     wiki_header = """# A collection of must read discussions started by community members"""
     content = wiki_header + "\n\n"
-    content += f"A handpicked collection of **{total_posts}** interesting posts, discusions & high-quality threads gathered over a {total_years} year period.\n\n"
+    content += f"A handpicked collection of **{total_posts}** interesting posts, discussions & high-quality threads gathered over {total_years} years.\n\n"
 
     for year in sorted(posts_by_year.keys(), reverse=True):
         content += f"## {year}\n\n"

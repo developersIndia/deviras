@@ -68,7 +68,7 @@ def update_wiki(reddit, wikipage, posts):
         # Add the posts for this year
         for post in posts_by_year[year]:
             formatted_date = datetime.strptime(post['created_at'], '%Y-%m-%dT%H:%M:%S').strftime('%d %b, %Y')
-            content += f"- `{formatted_date}` [`{post['title']}`]({post['url']})\n\n"
+            content += f"- `{formatted_date}` [**{post['title']}**]({post['url']})\n\n"
     
     # given a wiki link, update the wiki page with new markdown
     wikipage = reddit.subreddit(sub).wiki[wikipage]

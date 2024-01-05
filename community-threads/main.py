@@ -61,7 +61,8 @@ def update_wiki(reddit, wikipage, posts):
 
     wiki_header = """# A collection of must read discussions started by community members"""
     content = wiki_header + "\n\n"
-    content += f"A handpicked collection of **{total_posts}** interesting posts, discussions & high-quality threads gathered over {total_years} years.\n\n"
+    content += f"A handpicked collection of **{total_posts}** interesting posts, discussions & high-quality threads gathered over **{total_years}** years & counting.\n\n"
+    content += "If you spot on post that could be in this list, send us a [modmail](https://reddit.com/message/compose?to=r/developersIndia&subject=Community%20Threads%20Collection%20Suggestion&message=Hey%20folks%2C%0A%0A%3Cpost%20link%3E)\n\n"
 
     for year in sorted(posts_by_year.keys(), reverse=True):
         content += f"## {year}\n\n"

@@ -1,6 +1,7 @@
 import praw
 from collections import defaultdict
 import os
+import json
 
 client_id = os.environ["REDDIT_CLIENT_ID"]
 client_secret = os.environ["REDDIT_CLIENT_SECRET"]
@@ -30,7 +31,7 @@ emoji_flair_users = []
 for flair in subreddit.flair(limit=None):
     f = flair['flair_text'].strip()
 
-    if f.startswith(":") and f.endswith(":"):
+    if f.startswith(":") or f.endswith(":"):
         emoji_flair_count += 1
         emoji_flair_users.append(
             dict(
@@ -44,14 +45,43 @@ for flair in subreddit.flair(limit=None):
 # Convert the dictionary to a list of tuples and sort it by the count
 sorted_flairs = sorted(flair_count.items(), key=lambda x: x[1], reverse=True)
 
-# # Print the sorted list of flairs and their counts
-# for flair, count in sorted_flairs:
-#     print(f"Flair: {flair}, Count: {count}")
+# Fetch the list of available user flairs
+available_flairs = []
+for flair in subreddit.flair.templates:
+    if not flair['mod_only']:
+        available_flairs.append(flair['text'].strip())
 
-for user in emoji_flair_users:
-    print(user)
-# Calculate and print the total count of all flairs
-total_count = sum(flair_count.values())
-print(f"Total count of non-emoji flairs: {total_count}")
-print(f"Total count of emoji only flairs: {emoji_flair_count}")
-print(f"Total count of user-flairs: {total_count + emoji_flair_count}")
+
+# Initialize a dictionary to count available flairs
+available_flair_count = defaultdict(int)
+old_available_flair_count = defaultdict(int)
+# Iterate over the sorted flairs
+for flair, count in sorted_flairs:
+    # If the flair is available, increment its count
+    if flair in available_flairs:
+        available_flair_count[flair] += count
+    else:
+        old_available_flair_count[flair] += count
+
+# Print the usage count of each available flair
+# for flair, count in available_flair_count.items():
+#     print(f"Flair: {flair}, Usage Count: {count}")
+
+total_count = sum(available_flair_count.values())
+old_flairs_total_count = sum(old_available_flair_count.values())
+
+# print(f"Users with un-supported (old) text flairs: {old_flairs_total_count}")
+# print(f"Users with supported text flairs: {total_count}")
+# print(f"Users with emoji only flairs: {emoji_flair_count}")
+# print(f"Total count of user-flairs: {total_count + emoji_flair_count + old_flairs_total_count}")
+
+data = {
+    'Users with un-supported (old) text flairs': old_flairs_total_count,
+    'Users with supported text flairs': total_count,
+    'Users with emoji only flairs': emoji_flair_count,
+    'Total count of user-flairs': total_count + emoji_flair_count + old_flairs_total_count
+}
+
+formatted_data = json.dumps(data, indent=4)  # Format the data as JSON with indentation
+
+print(formatted_data)

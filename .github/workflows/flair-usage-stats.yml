@@ -13,5 +13,5 @@ jobs:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}  # Add your Discord webhook URL in repository secrets
         run: |
           curl -X POST -H "Content-Type: application/json" -d '{
-            "content": "Hello from GitHub Action! This is a multiline message.\n\nHere is a new line.\nAnd another one."
+            "content": "Hello from GitHub Action! This is a multiline message.\n\n```\nHere is a new line.\nAnd another one.```"
           }' $WEBHOOK_URL

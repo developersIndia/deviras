@@ -1,0 +1,15 @@
+name: User Flair Usage Stats
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  send_discord_message:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Discord message
+        env:
+          WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}  # Add your Discord webhook URL in repository secrets
+        run: |
+          curl -X POST -H "Content-Type: application/json" -d '{"content":"Hello from GitHub Action!"}' $WEBHOOK_URL

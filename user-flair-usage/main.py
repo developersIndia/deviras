@@ -2,11 +2,13 @@ import praw
 from collections import defaultdict
 import os
 import json
+import requests
 
 client_id = os.environ["REDDIT_CLIENT_ID"]
 client_secret = os.environ["REDDIT_CLIENT_SECRET"]
 reddit_pass = os.environ["REDDIT_PASSWORD"]
 username = os.environ["REDDIT_USERNAME"]
+webhook_url = os.environ["DISCORD_WEBHOOK_URL"]
 user_agent = 'User Flair Usage'
 sub = "developersIndia"
 
@@ -63,9 +65,6 @@ for flair, count in sorted_flairs:
     else:
         old_available_flair_count[flair] += count
 
-# Print the usage count of each available flair
-# for flair, count in available_flair_count.items():
-#     print(f"Flair: {flair}, Usage Count: {count}")
 
 total_count = sum(available_flair_count.values())
 old_flairs_total_count = sum(old_available_flair_count.values())
@@ -76,12 +75,12 @@ old_flairs_total_count = sum(old_available_flair_count.values())
 # print(f"Total count of user-flairs: {total_count + emoji_flair_count + old_flairs_total_count}")
 
 data = {
-    'Users with un-supported (old) text flairs': old_flairs_total_count,
-    'Users with supported text flairs': total_count,
-    'Users with emoji only flairs': emoji_flair_count,
-    'Total count of user-flairs': total_count + emoji_flair_count + old_flairs_total_count
+    'Users with un-supported (old) text flairs': f"**{old_flairs_total_count}**",
+    'Users with supported text flairs': f"**{total_count}**",
+    'Users with emoji only flairs': f"**{emoji_flair_count}**",
+    'Total count of user-flairs': f"**{total_count + emoji_flair_count + old_flairs_total_count}**"
 }
 
-formatted_data = json.dumps(data, indent=4)  # Format the data as JSON with indentation
+formatted_data = "\n".join([f"{k}: {v}" for k, v in data.items()])  # Format the data as a string with each item on a new line
 
-print(formatted_data)
+requests.post(webhook_url, json={"content": formatted_data})

@@ -1,6 +1,9 @@
 name: User Flair Usage Stats
 
 on:
+  schedule:
+    # Runs every day at 3:30 PM UTC (9 PM IST)
+    - cron: '30 15 * * *' 
   workflow_dispatch:
   
 jobs:

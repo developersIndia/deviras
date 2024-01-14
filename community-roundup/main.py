@@ -29,7 +29,7 @@ def get_gist_content(gist_id):
     return gist["files"][filename]["content"]
 
 
-def get_last_month_posts():
+def get_monthly_roundup():
     saved_collection_posts = json.loads(get_gist_content(gist_id))
     return saved_collection_posts
 
@@ -76,7 +76,7 @@ def main():
     subreddit = reddit.subreddit(sub)
 
     if is_last_day_of_month():
-        posts = get_last_month_posts()
+        posts = get_monthly_roundup()
         create_community_roundup_post(subreddit, posts)
         print("Community Roundup post created successfully!")
     else:

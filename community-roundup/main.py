@@ -42,7 +42,7 @@ def create_community_roundup_post(subreddit, posts):
         )
     )
        
-    title = "Community Roundup: List of interesting posts & discussions that happened this month - {month} {year}".format(month=datetime.date.today().strftime("%B"), year=datetime.date.today().year)
+    title = "Community Roundup: List of must read posts & discussions that happened this month - {month} {year}".format(month=datetime.date.today().strftime("%B"), year=datetime.date.today().year)
     footer_text = """\n\n
 **Community Roundup is posted on the last day of every month. You can find the [schedule on our events calendar](https://developersindia.in/events-calendar). To find the list of all [interesting posts & community threads, checkout our wiki](https://www.reddit.com/r/developersIndia/wiki/community-threads/).**
 """

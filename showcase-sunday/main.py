@@ -26,7 +26,7 @@ def create_showcase_sunday_megathread(subreddit):
         )
     )
        
-    title = "Showcase Sunday Megathread - {month}, {year}".format(month=datetime.date.today().strftime("%B"), year=datetime.date.today().year)
+    title = "Showcase Sunday Megathread - {month} {year}".format(month=datetime.date.today().strftime("%B"), year=datetime.date.today().year)
     text = """
 It's time for our monthly showcase thread where we celebrate the incredible talent in our community. Whether it's an app, a website, a tool, or anything else you've built, we want to see it! Share your latest creations, side projects, or even your work-in-progress.
 

@@ -180,6 +180,8 @@ def create_job_post(subreddit) -> Post:
         flair_id=flair["flair_template_id"],
     )
     submission.mod.sticky()
+    submission.mod.distinguish()
+    submission.mod.approve()
 
     return Post(post_id=submission.id, epoch=submission.created_utc)
 

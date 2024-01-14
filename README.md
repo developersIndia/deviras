@@ -2,7 +2,6 @@
 
 > Bunch of scripts to automate stuff in r/developersIndia.
 
-
 [![Discord](https://img.shields.io/discord/669880381649977354?color=%237289da&label=Discord&logo=Discord)](https://discordapp.com/invite/MKXMSNC)
 [![Subreddit subscribers](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdevelopersindia.github.io%2Fmetrics%2Fdata%2F&query=%24.totalMembers&suffix=%20members&style=flat&logo=reddit&label=r%2FdevelopersIndia&color=orange&link=https%3A%2F%2Fwww.reddit.com%2Fr%2FdevelopersIndia
 )](https://www.reddit.com/r/developersIndia/)
@@ -25,9 +24,9 @@
 - Used for grabbing the posts from [community threads collection](https://www.reddit.com/r/developersIndia/collection/958aef35-f9cb-414d-ab33-08bc639e47de/) and adding it to the [wiki](https://www.reddit.com/r/developersIndia/wiki/community-threads/).
 - ![action build](https://github.com/developersIndia/deviras/actions/workflows/collection-thread-updater.yml/badge.svg)
 
-### [job_thread](https://github.com/developersIndia/deviras/blob/main/job_thread/main.py)
+### [job-thread](https://github.com/developersIndia/deviras/blob/main/job-thread/main.py)
 
-Used for creating [hiring threads](https://www.reddit.com/r/developersIndia/?f=flair_name%3A%22Hiring%22) in the subreddit that gets the job from our [job board](https://developersindia.in/job-board/).
+- Used for creating [hiring threads](https://www.reddit.com/r/developersIndia/?f=flair_name%3A%22Hiring%22) in the subreddit that gets the job from our [job board](https://developersindia.in/job-board/).
 
 ### [showcase-sunday](https://github.com/developersIndia/deviras/blob/main/showcase-sunday/main.py)
 

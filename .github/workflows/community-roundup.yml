@@ -1,0 +1,35 @@
+name: Community Roundup
+
+on:
+  schedule:
+    # Run at 3:25 AM UTC (8:55 AM IST) every day
+    - cron: '25 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+    - name: Create Community Roundup Post
+      env:
+        REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+        REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+        REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
+        REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
+        GIST_ID: ${{ secrets.GIST_ID }}
+        GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
+      run: |
+        cd community-roundup
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        python main.py

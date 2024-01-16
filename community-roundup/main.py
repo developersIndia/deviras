@@ -33,14 +33,16 @@ def get_gist_content(gist_id):
 
 def get_monthly_roundup():
     saved_collection_posts = json.loads(get_gist_content(gist_id))
-    # filter posts for this month
+    # filter posts for this month & year
     saved_collection_posts = list(
         filter(
             lambda post: datetime.datetime.strptime(
                 post["created_at"], "%Y-%m-%dT%H:%M:%S"
-            ).month
-            == datetime.date.today().month,
-            saved_collection_posts,
+            ).year == datetime.date.today().year and
+            datetime.datetime.strptime(
+                post["created_at"], "%Y-%m-%dT%H:%M:%S"
+            ).month == datetime.date.today().month,
+            saved_collection_posts["posts"],
         )
     )
     return saved_collection_posts
@@ -57,15 +59,19 @@ def create_community_roundup_post(subreddit, posts):
     title = "Community Roundup: List of must read posts & discussions that happened this month - {month} {year}".format(
         month=datetime.date.today().strftime("%B"), year=datetime.date.today().year
     )
+
+    text = "|||"
+    text += "\n|--------|--------|\n"
     footer_text = """\n\n
 ---
 
-**Community Roundup is posted on the last day of every month. You can find the [schedule on our events calendar](https://developersindia.in/events-calendar). To find the list of all [interesting posts & community threads, checkout our wiki](https://www.reddit.com/r/developersIndia/wiki/community-threads/).**
+**Community Roundup is posted on the last day of every month. You can find the [schedule on our events calendar](https://developersindia.in/events-calendar). To find the list of all [interesting posts & community threads over time, checkout our wiki](https://www.reddit.com/r/developersIndia/wiki/community-threads/).\n**
+If you think we missed any interesting post or discussion, please share it with us via modmail.
 """
     posts_counter = 0
     for post in posts:
         posts_counter += 1
-        text += f"#### {posts_counter}. [{post['title']}]({post['url']})\n"
+        text += f"| {posts_counter} | [**{post['title']}**]({post['url']}) |\n"
 
     text = text + footer_text
 
@@ -77,6 +83,7 @@ def create_community_roundup_post(subreddit, posts):
     submission.mod.approve()
     submission.mod.sticky()
     submission.mod.distinguish()
+    submission.mod.lock()
 
     return submission
 

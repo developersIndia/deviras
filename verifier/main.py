@@ -15,7 +15,9 @@ def get_last_activity_times(reddit, username):
 
     # Get the user's last comment time in the subreddit
     last_comment_time = None
-    for comment in user.comments.new(limit=100):  # look at the user's 100 most recent comments
+    for comment in user.comments.new(
+        limit=100
+    ):  # look at the user's 100 most recent comments
         if comment.subreddit.display_name == sub:
             last_comment_time = datetime.datetime.fromtimestamp(comment.created_utc)
             break
@@ -23,7 +25,9 @@ def get_last_activity_times(reddit, username):
     # Get the user's last post creation time and title in the subreddit
     last_post_time = None
     last_post_title = None
-    for submission in user.submissions.new(limit=100):  # look at the user's 100 most recent posts
+    for submission in user.submissions.new(
+        limit=100
+    ):  # look at the user's 100 most recent posts
         if submission.subreddit.display_name == sub:
             last_post_time = datetime.datetime.fromtimestamp(submission.created_utc)
             last_post_title = submission.title
@@ -31,12 +35,14 @@ def get_last_activity_times(reddit, username):
 
     return last_comment_time, last_post_time, last_post_title
 
+
 def assign_user_flair(reddit, username, flair_text):
     subreddit = reddit.subreddit(sub)
     flair = next(subreddit.flair(username))
 
-    template = get_flair_template_from_text(reddit, flair['flair_text'])
-    subreddit.flair.set(username, text=flair_text, flair_template_id=template['id'])
+    template = get_flair_template_from_text(reddit, flair["flair_text"])
+    subreddit.flair.set(username, text=flair_text, flair_template_id=template["id"])
+
 
 def get_flair_templates(reddit):
     subreddit = reddit.subreddit(sub)
@@ -46,7 +52,7 @@ def get_flair_templates(reddit):
 def get_flair_template_from_text(reddit, flair_text):
     templates = get_flair_templates(reddit)
     for template in templates:
-        if template['text'] == flair_text:
+        if template["text"] == flair_text:
             return template
 
 
@@ -68,7 +74,9 @@ PS: This was an automated messaage, no need to reply. [Reach out to mods](https:
 
 Namaste 🙏
 """
-    reddit.redditor(username).message(subject=message_subject, message=message_text.format(flair=flair_text))
+    reddit.redditor(username).message(
+        subject=message_subject, message=message_text.format(flair=flair_text), from_subreddit=reddit.subreddit(sub)
+    )
 
 
 def main():
@@ -97,7 +105,7 @@ def main():
         print(f"{reddit_username}'s last post on developersIndia was \"{last_post_title}\" on {last_post_time}")
 
     assign_user_flair(reddit, reddit_username, flair_text)
-    send_message(reddit, reddit_username)
+    send_message(reddit, reddit_username, flair_text)
 
 
 if __name__ == "__main__":

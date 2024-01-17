@@ -1,7 +1,7 @@
 import os
 import sys
 import praw
-
+import datetime
 
 client_id = os.environ["REDDIT_CLIENT_ID"]
 client_secret = os.environ["REDDIT_CLIENT_SECRET"]
@@ -9,6 +9,27 @@ reddit_pass = os.environ["REDDIT_PASSWORD"]
 username = os.environ["REDDIT_USERNAME"]
 sub = "developersIndia"
 
+
+def get_last_activity_times(reddit, username):
+    user = reddit.redditor(username)
+
+    # Get the user's last comment time in the subreddit
+    last_comment_time = None
+    for comment in user.comments.new(limit=100):  # look at the user's 100 most recent comments
+        if comment.subreddit.display_name == sub:
+            last_comment_time = datetime.datetime.fromtimestamp(comment.created_utc)
+            break
+
+    # Get the user's last post creation time and title in the subreddit
+    last_post_time = None
+    last_post_title = None
+    for submission in user.submissions.new(limit=100):  # look at the user's 100 most recent posts
+        if submission.subreddit.display_name == sub:
+            last_post_time = datetime.datetime.fromtimestamp(submission.created_utc)
+            last_post_title = submission.title
+            break
+
+    return last_comment_time, last_post_time, last_post_title
 
 def assign_user_flair(reddit, username, flair_text):
     subreddit = reddit.subreddit(sub)
@@ -68,8 +89,15 @@ def main():
     # get flair text from CLI args
     flair_text = sys.argv[2]
 
+    # get last activity times
+    last_comment_time, last_post_time, last_post_title = get_last_activity_times(reddit, reddit_username)
+    if last_comment_time is not None:
+        print(f"{reddit_username}'s last comment time on developersIndia was {last_comment_time}")
+    if last_post_time is not None:
+        print(f"{reddit_username}'s last post on developersIndia was \"{last_post_title}\" on {last_post_time}")
+
     assign_user_flair(reddit, reddit_username, flair_text)
-    # send_message(reddit, reddit_username)
+    send_message(reddit, reddit_username)
 
 
 if __name__ == "__main__":

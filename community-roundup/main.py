@@ -65,8 +65,8 @@ def create_community_roundup_post(subreddit, posts):
     footer_text = """\n\n
 ---
 
-**Community Roundup is posted on the last day of every month. To find the list of all [interesting posts & community threads over time, checkout our wiki](https://www.reddit.com/r/developersIndia/wiki/community-threads/).\n**
-If you think we missed any interesting posts or discussions, please share it with us via [modmail](https://reddit.com/message/compose?to=r/developersIndia&subject=Community%20Threads%20Collection%20Suggestion&message=Hey%20folks%2C%0A%0A%3Cpost%20link%3E).\n
+**Community Roundup is posted on the last day of each month. To explore a compilation of all interesting posts and community threads over time, [visit our wiki](https://www.reddit.com/r/developersIndia/wiki/community-threads/).\n**
+The collection is curated by our volunteer team & is independent of the number of upvotes and comments. If you believe we may have overlooked any engaging posts or discussions, please share them with us via [modmail](https://reddit.com/message/compose?to=r/developersIndia&subject=Community%20Threads%20Collection%20Suggestion&message=Hey%20folks%2C%0A%0A%3Cpost%20link%3E).\n
 """
     posts_counter = 0
     for post in posts:

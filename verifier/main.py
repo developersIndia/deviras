@@ -35,6 +35,16 @@ def get_last_activity_times(reddit, username):
 
     return last_comment_time, last_post_time, last_post_title
 
+def get_current_flair(reddit, username):
+    subreddit = reddit.subreddit(sub)
+    flair = next(subreddit.flair(username))
+    template = get_flair_template_from_text(reddit, flair["flair_text"])
+
+    if template is None:
+        return None, None
+
+    return flair["flair_text"], template["id"]
+
 
 def assign_user_flair(reddit, username, flair_text):
     subreddit = reddit.subreddit(sub)
@@ -98,14 +108,32 @@ def main():
     flair_text = sys.argv[2]
 
     # get last activity times
+    print(f"Getting last activity times for {reddit_username}...")
     last_comment_time, last_post_time, last_post_title = get_last_activity_times(reddit, reddit_username)
     if last_comment_time is not None:
         print(f"{reddit_username}'s last comment time on developersIndia was {last_comment_time}")
     if last_post_time is not None:
         print(f"{reddit_username}'s last post on developersIndia was \"{last_post_title}\" on {last_post_time}")
 
+
+    # get current flair
+    current_flair_text, current_flair_template_id = get_current_flair(reddit, reddit_username)
+    if current_flair_text is None:
+        print(f"{reddit_username} does not have a flair on r/developersIndia")
+        sys.exit(0)
+    else:
+        print(f"{reddit_username}'s current flair is \"{current_flair_text}\", template id: {current_flair_template_id}")
+
+    # ask for user input
+    user_input = input(f"Do you want to verify {reddit_username}? [Y/n]: ")
+    if user_input.lower() != 'y':
+        print("Cancelled verification operation.")
+        sys.exit(0)
+
     assign_user_flair(reddit, reddit_username, flair_text)
+    print(f"Updated {reddit_username}'s flair to \"{flair_text}\"")
     send_message(reddit, reddit_username, flair_text)
+    print(f"Sent verification confirmation message to {reddit_username}")
 
 
 if __name__ == "__main__":

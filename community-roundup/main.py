@@ -26,6 +26,7 @@ def get_posts_by_flair(subreddit, flair):
     for post in subreddit.search(f'flair_name:"{flair}"', time_filter='month'):
         post_date = datetime.datetime.fromtimestamp(post.created_utc)
         if post_date.year == current_year and post_date.month == current_month:
+            post.title = post.title.replace("|", "\\|")  # Escape the "|" character
             posts.append(post)
 
     posts = sorted(posts, key=lambda post: post.created_utc, reverse=True)

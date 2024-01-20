@@ -33,7 +33,7 @@
 - Used for creating [Showcase Sunday Megathreads](https://www.reddit.com/r/developersIndia/search/?q=flair%3A%20Showcase%20Sunday&restrict_sr=1) posts in the subreddit.
 - ![action build](https://github.com/developersIndia/deviras/actions/workflows/showcase-sunday.yml/badge.svg)
 
-### [AMA Summarizer](https://github.com/developersIndia/deviras/blob/main/AMA%20Summarizer/ama-summarizer.py/)
+### [AMA Summarizer](https://github.com/developersIndia/deviras/blob/main/ama-summarizer/main.py/)
 - The Python script to help during AMAs. It generates a markdown file of questions and links of the questions the AMA guest has answered. 
 
 

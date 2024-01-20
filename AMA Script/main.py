@@ -1,21 +1,20 @@
 import praw
 from dotenv import dotenv_values
 
-# Load credentials from .env file
-env_config = dotenv_values('.env')
 
 # Reddit API credentials
-client_id = env_config['REDDIT_CLIENT_ID']
-client_secret = env_config['REDDIT_CLIENT_SECRET']
-user_agent = env_config['REDDIT_USER_AGENT']
-username = env_config['REDDIT_USERNAME']
-password = env_config['REDDIT_PASSWORD']
+user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 14.2; rv:109.0) Gecko/20100101 Firefox/121.0'
+client_id = os.environ["REDDIT_CLIENT_ID"]
+client_secret = os.environ["REDDIT_CLIENT_SECRET"]
+reddit_pass = os.environ["REDDIT_PASSWORD"]
+username = os.environ["REDDIT_USERNAME"]
 
+# Create a Reddit instance
 reddit = praw.Reddit(client_id=client_id,
                      client_secret=client_secret,
+                     password=reddit_pass,
                      user_agent=user_agent,
-                     username=username,
-                     password=password)
+                     username=username)
 
 post_url = 'https://reddit.com/r/developersIndia/' # replace with AMA post URL
 

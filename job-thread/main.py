@@ -182,6 +182,7 @@ def create_job_post(subreddit) -> Post:
     submission.mod.sticky()
     submission.mod.distinguish()
     submission.mod.approve()
+    submission.mod.lock()
 
     return Post(post_id=submission.id, epoch=submission.created_utc)
 

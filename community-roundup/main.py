@@ -20,11 +20,12 @@ def is_last_day_of_month():
     tomorrow = today + datetime.timedelta(days=1)
     return tomorrow.day == 1
 
+
 def get_posts_by_flair(subreddit, flair):
     current_year = datetime.date.today().year
     current_month = datetime.date.today().month
     posts = []
-    for post in subreddit.search(f'flair_name:"{flair}"', time_filter='month'):
+    for post in subreddit.search(f'flair_name:"{flair}"', time_filter="month"):
         post_date = datetime.datetime.fromtimestamp(post.created_utc)
         if post_date.year == current_year and post_date.month == current_month:
             post.title = post.title.replace("|", "\\|")  # Escape the "|" character
@@ -44,6 +45,7 @@ def get_weekly_discussion_posts(subreddit):
 
     return get_posts_by_flair(subreddit, flair["flair_text"])
 
+
 def get_ama_posts(subreddit):
     flair = next(
         filter(
@@ -54,6 +56,7 @@ def get_ama_posts(subreddit):
 
     return get_posts_by_flair(subreddit, flair["flair_text"])
 
+
 def get_i_made_this_posts(subreddit):
     flair = next(
         filter(
@@ -62,14 +65,27 @@ def get_i_made_this_posts(subreddit):
         )
     )
 
-     # Get all posts with the specified flair
+    # Get all posts with the specified flair
     posts = get_posts_by_flair(subreddit, flair["flair_text"])
 
     # Sort the posts by upvotes and then comments in descending order
-    posts = sorted(posts, key=lambda post: (post.score, post.num_comments), reverse=True)
+    posts = sorted(
+        posts, key=lambda post: (post.score, post.num_comments), reverse=True
+    )
 
     # Return only the top 10 posts
     return posts[:10]
+
+
+def get_announcement_posts(subreddit):
+    flair = next(
+        filter(
+            lambda flair: "Announcement" in flair["flair_text"],
+            subreddit.flair.link_templates.user_selectable(),
+        )
+    )
+
+    return get_posts_by_flair(subreddit, flair["flair_text"])
 
 
 def get_gist_content(gist_id):
@@ -90,17 +106,26 @@ def get_community_threads():
         filter(
             lambda post: datetime.datetime.strptime(
                 post["created_at"], "%Y-%m-%dT%H:%M:%S"
-            ).year == datetime.date.today().year and
-            datetime.datetime.strptime(
+            ).year
+            == datetime.date.today().year
+            and datetime.datetime.strptime(
                 post["created_at"], "%Y-%m-%dT%H:%M:%S"
-            ).month == datetime.date.today().month,
+            ).month
+            == datetime.date.today().month,
             saved_collection_posts["posts"],
         )
     )
     return saved_collection_posts
 
 
-def create_community_roundup_post(subreddit, posts, i_made_this_posts, weekly_discussion_posts, ama_posts):
+def create_community_roundup_post(
+    subreddit,
+    posts,
+    i_made_this_posts,
+    weekly_discussion_posts,
+    ama_posts,
+    announcement_posts,
+):
     flair = next(
         filter(
             lambda flair: "Community Roundup" in flair["flair_text"],
@@ -118,6 +143,13 @@ def create_community_roundup_post(subreddit, posts, i_made_this_posts, weekly_di
 **Community Roundup is posted on the last day of each month. To explore a compilation of all interesting posts and community threads over time, [visit our wiki](https://www.reddit.com/r/developersIndia/wiki/community-threads/).**\n
 The collection is curated by our volunteer team & is independent of the number of upvotes and comments (except for "I made This" posts). If you believe we may have overlooked any engaging posts or discussions, please share them with us via [modmail](https://reddit.com/message/compose?to=r/developersIndia&subject=Community%20Threads%20Collection%20Suggestion&message=Hey%20folks%2C%0A%0A%3Cpost%20link%3E).\n
 """
+
+    if len(announcement_posts) > 0:
+        text = "## Announcements\n||\n|--------|\n"
+        for post in announcement_posts:
+            text += f"| [**{post.title}**]({post.url}) |\n"
+    else:
+        print("No announcements found. Skipping")
 
     if len(ama_posts) > 0:
         text = "\n## AMAs\n||\n|--------|\n"
@@ -142,14 +174,12 @@ The collection is curated by our volunteer team & is independent of the number o
     else:
         print("No weekly discussions found. Skipping")
 
-
     if len(i_made_this_posts) > 0:
         text += "\n## I Made This\n|Top 10 posts|\n|--------|\n"
         for post in i_made_this_posts:
             text += f"| [**{post.title}**]({post.url}) |\n"
     else:
         print("No I Made This posts found. Skipping")
-
 
     text = text + footer_text
 
@@ -182,7 +212,10 @@ def main():
         i_made_this_posts = get_i_made_this_posts(subreddit)
         weekly_discussion_posts = get_weekly_discussion_posts(subreddit)
         ama_posts = get_ama_posts(subreddit)
-        create_community_roundup_post(subreddit, posts, i_made_this_posts, weekly_discussion_posts, ama_posts)
+        announcement_posts = get_announcement_posts(subreddit)
+        create_community_roundup_post(
+            subreddit, posts, i_made_this_posts, weekly_discussion_posts, ama_posts, announcement_posts
+        )
         print("Community Roundup post created successfully!")
     else:
         print("Skipping. Not the last day of the month")

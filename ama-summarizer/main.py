@@ -51,14 +51,14 @@ def main():
             if question_text != "[deleted]":
                 question_link = "https://reddit.com" + comment.parent().permalink
                 markdown_file += (
-                    f"{question_number}. [{question_text}]({question_link})\n"
-                )
+                    f"{question_number}. [{question_text}]({question_link})\n\n"
+                )  # Add an extra newline after each question
                 question_number += 1
 
     with open("questions.md", "w", encoding="utf-8") as file:
         file.write(markdown_file)
 
-    print(f"{question_number} questions generated successfully.")
+    print(f"{question_number - 1} questions generated successfully.")
 
 
 if __name__ == "__main__":

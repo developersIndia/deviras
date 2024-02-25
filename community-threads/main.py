@@ -1,5 +1,6 @@
 import praw
 import os
+import argparse
 from datetime import datetime
 import json
 from collections import defaultdict 
@@ -36,13 +37,26 @@ def update_gist(gist_id, filename, content, description=""):
     )
     return response.json()
 
+# farewell, reddit collections
+# def get_collection(reddit):
+#     collection = reddit.subreddit(sub).collections(
+#         permalink="https://reddit.com/r/developersIndia/collection/958aef35-f9cb-414d-ab33-08bc639e47de"
+#     )
+#     return collection
 
-def get_collection(reddit):
-    collection = reddit.subreddit(sub).collections(
-        permalink="https://reddit.com/r/developersIndia/collection/958aef35-f9cb-414d-ab33-08bc639e47de"
-    )
-    return collection
-
+def get_post_data(reddit, post_url):
+    submission = reddit.submission(url=post_url)
+    post = {
+        "title": submission.title,
+        "url": submission.url,
+        "id": submission.id,
+        "num_comments": submission.num_comments,
+        "created_at": datetime.utcfromtimestamp(
+            submission.created_utc
+        ).isoformat(),
+        "flair_text": submission.link_flair_text,
+    }
+    return post
 
 def update_wiki(reddit, wikipage, posts):
     # Group posts by year
@@ -78,6 +92,10 @@ def update_wiki(reddit, wikipage, posts):
 
 
 def main():
+    parser = argparse.ArgumentParser(description='Update Community Threads Collection.')
+    parser.add_argument('post_url', help='The URL of the Reddit post to add.')
+    args = parser.parse_args()
+
     reddit = praw.Reddit(
         client_id=client_id,
         client_secret=client_secret,
@@ -86,70 +104,30 @@ def main():
         user_agent=f"Automod reader by u/{username}",
     )
 
-    collection = get_collection(reddit)
-
     saved_collection_posts = json.loads(get_gist_content(gist_id))
     saved_collection_ids = [post["id"] for post in saved_collection_posts["posts"]]
 
     print(f"Database was last updated on {saved_collection_posts['collection_last_updated']}")
-    print(f"Collection was last updated on {datetime.utcfromtimestamp(collection.last_update_utc).isoformat()}")
 
-    if (
-        saved_collection_posts["collection_last_updated"]
-        != datetime.utcfromtimestamp(collection.last_update_utc).isoformat()
-    ):
-        print("Collection was updated, getting new posts data...")
+    posts = []
+    for submission_id in saved_collection_posts["posts"]:
+        post = {
+            "title": submission_id["title"],
+            "url": submission_id["url"],
+            "id": submission_id["id"],
+            "num_comments": submission_id["num_comments"],
+            "created_at": submission_id["created_at"],
+            "flair_text": submission_id["flair_text"],
+        }
+        posts.append(post)
 
-        # given 2 lists find non-common elements
-        db_posts = set(saved_collection_ids)
-        collection_posts = []
-        for submission in collection:
-            collection_posts.append(submission.id)
-        collection_posts = set(collection_posts)
-
-        new_posts = list(collection_posts - db_posts)
-        deleted_posts = list(db_posts - collection_posts)
-
-        print(f"Found {len(new_posts)} new posts!")
-        print(f"Found {len(deleted_posts)} deleted posts!")
-
-        posts = []
-        # load the saved collection posts data
-        for submission_id in saved_collection_posts["posts"]:
-            if submission_id["id"] in deleted_posts:
-                continue
-            post = {
-                "title": submission_id["title"],
-                "url": submission_id["url"],
-                "id": submission_id["id"],
-                "num_comments": submission_id["num_comments"],
-                "created_at": submission_id["created_at"],
-                "flair_text": submission_id["flair_text"],
-            }
-            posts.append(post)
-
-        # get the new posts data
-        for submission_id in new_posts:
-            submission = reddit.submission(submission_id)
-            post = {
-                "title": submission.title,
-                "url": submission.url,
-                "id": submission.id,
-                "num_comments": submission.num_comments,
-                "created_at": datetime.utcfromtimestamp(
-                    submission.created_utc
-                ).isoformat(),
-                "flair_text": submission.link_flair_text,
-            }
-            posts.append(post)
-
-        # sort the posts by created_at
+    new_post = get_post_data(reddit, args.post_url)
+    if new_post["id"] not in saved_collection_ids:
+        posts.append(new_post)
         posts = sorted(posts, key=lambda k: k["created_at"])
 
         collection_json = {
-            "collection_last_updated": datetime.utcfromtimestamp(
-                collection.last_update_utc
-            ).isoformat(),
+            "collection_last_updated": datetime.utcnow().isoformat(),
             "posts": posts,
         }
 
@@ -157,7 +135,7 @@ def main():
         print("Internal database updated successfully!")
         update_wiki(reddit, "community-threads", posts)
     else:
-        print("Wiki is up to date!")
+        print("Post is already in the collection. No changes were made.")
 
 
 if __name__ == "__main__":

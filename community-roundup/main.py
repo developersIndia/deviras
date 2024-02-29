@@ -152,7 +152,7 @@ The collection is curated by our volunteer team & is independent of the number o
         print("No announcements found. Skipping")
 
     if len(ama_posts) > 0:
-        text = "\n## AMAs\n||\n|--------|\n"
+        text += "\n## AMAs\n||\n|--------|\n"
         for post in ama_posts:
             text += f"| [**{post.title}**]({post.url}) |\n"
     else:

@@ -1,6 +1,7 @@
 import os
 import sys
 import praw
+import time
 import datetime
 
 client_id = os.environ["REDDIT_CLIENT_ID"]
@@ -19,7 +20,7 @@ def get_last_activity_times(reddit, username):
         limit=100
     ):  # look at the user's 100 most recent comments
         if comment.subreddit.display_name == sub:
-            last_comment_time = datetime.datetime.fromtimestamp(comment.created_utc)
+            last_comment_time = datetime.datetime.fromtimestamp(comment.created_utc).strftime('%d %B, %Y')
             break
 
     # Get the user's last post creation time and title in the subreddit
@@ -29,7 +30,7 @@ def get_last_activity_times(reddit, username):
         limit=100
     ):  # look at the user's 100 most recent posts
         if submission.subreddit.display_name == sub:
-            last_post_time = datetime.datetime.fromtimestamp(submission.created_utc)
+            last_post_time = datetime.datetime.fromtimestamp(submission.created_utc).strftime('%d %B, %Y')
             last_post_title = submission.title
             break
 
@@ -45,13 +46,25 @@ def get_current_flair(reddit, username):
 
     return flair["flair_text"], template["id"]
 
+def get_flair(reddit, username):
+    subreddit = reddit.subreddit(sub)
+    flair = next(subreddit.flair(username))
+
+    template = get_template_from_flair_text(reddit, flair["flair_text"])
+
+    if template is None:
+        return None, None
+
+    return flair["flair_text"], template["id"]
 
 def assign_user_flair(reddit, username, flair_text):
     subreddit = reddit.subreddit(sub)
     flair = next(subreddit.flair(username))
 
     template = get_flair_template_from_text(reddit, flair["flair_text"])
-    subreddit.flair.set(username, text=flair_text, flair_template_id=template["id"])
+    # append YoE to the flair text
+    verified_text = f"{flair['flair_text']} | {flair_text}"
+    subreddit.flair.set(username, text=verified_text, flair_template_id=template["id"])
 
 
 def get_flair_templates(reddit):
@@ -63,6 +76,14 @@ def get_flair_template_from_text(reddit, flair_text):
     templates = get_flair_templates(reddit)
     for template in templates:
         if template["text"] == flair_text:
+            return template
+
+
+def get_template_from_flair_text(reddit, flair_text):
+    templates = get_flair_templates(reddit)
+    for template in templates:
+        # check if the flair text is in the template
+        if template["text"] in flair_text:
             return template
 
 
@@ -117,8 +138,14 @@ def main():
 
 
     # get current flair
-    current_flair_text, current_flair_template_id = get_current_flair(reddit, reddit_username)
-    if current_flair_text is None:
+    current_flair_text, current_flair_template_id = get_flair(reddit, reddit_username)
+
+    # TODO figure out final flair text
+    if "Verified" in current_flair_text or "YoE" in current_flair_text:
+        print(f"{reddit_username} is already verified")
+        sys.exit(0)
+
+    if current_flair_text is None and current_flair_template_id is None:
         print(f"{reddit_username} does not have a flair on r/developersIndia")
         sys.exit(0)
     else:
@@ -131,8 +158,11 @@ def main():
         sys.exit(0)
 
     assign_user_flair(reddit, reddit_username, flair_text)
-    print(f"Updated {reddit_username}'s flair to \"{flair_text}\"")
-    send_message(reddit, reddit_username, flair_text)
+    # Ya I know, just don't ask
+    time.sleep(2)
+    updated_flair_text, _ = get_flair(reddit, reddit_username)
+    print(f"Updated {reddit_username}'s flair to \"{updated_flair_text}\"")
+    send_message(reddit, reddit_username, updated_flair_text)
     print(f"Sent verification confirmation message to {reddit_username}")
 
 

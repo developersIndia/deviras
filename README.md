@@ -79,8 +79,10 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://animesh-ghosh.github.io/"><img src="https://avatars.githubusercontent.com/u/34956994?v=4?s=100" width="100px;" alt="MaDDogx"/><br /><sub><b>MaDDogx</b></sub></a><br /><a href="https://github.com/developersIndia/deviras/commits?author=Animesh-Ghosh" title="Code">💻</a> <a href="https://github.com/developersIndia/deviras/commits?author=Animesh-Ghosh" title="Tests">⚠️</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://pratham.cc"><img src="https://avatars.githubusercontent.com/u/67585967?v=4?s=100" width="100px;" alt="Pratham"/><br /><sub><b>Pratham</b></sub></a><br /><a href="https://github.com/developersIndia/deviras/commits?author=git-bruh" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://nisarga.me/"><img src="https://avatars.githubusercontent.com/u/45588772?v=4?s=100" width="100px;" alt="Nisarga Adhikary"/><br /><sub><b>Nisarga Adhikary</b></sub></a><br /><a href="https://github.com/developersIndia/deviras/commits?author=ni5arga" title="Code">💻</a></td>
+     <td align="center" valign="top" width="14.28%"><a href="https://lineararray.nekoweb.org"><img src="https://github.com/lineararray.png" width="100px;" alt="LinearArray"/><br /><sub><b>LinearArray</b></sub></a><br /><a href="https://github.com/developersIndia/deviras/commits?author=LinearArray" title="Code">💻</a></td>
     </tr>
   </tbody>
+ 
 </table>
 
 <!-- markdownlint-restore -->

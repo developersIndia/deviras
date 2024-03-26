@@ -33,7 +33,7 @@
         "test"
       ]
     },
-    {
+      {
       "login": "git-bruh",
       "name": "Pratham",
       "avatar_url": "https://avatars.githubusercontent.com/u/67585967?v=4",
@@ -47,6 +47,15 @@
       "name": "Nisarga Adhikary",
       "avatar_url": "https://avatars.githubusercontent.com/u/45588772?v=4",
       "profile": "https://nisarga.me/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "LinearArray",
+      "name": "LinearArray",
+      "avatar_url": "https://github.com/lineararray.png",
+      "profile": "https://github.com/lineararray",
       "contributions": [
         "code"
       ]

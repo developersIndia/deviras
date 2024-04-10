@@ -49,15 +49,15 @@ def send_message(reddit, username, post_link):
     message_subject = 'Woohoo! Your post is now part of our community threads collection!'
     message_text = """
 Hi there,\n
-It looks like your [recent post]({post_link}) on r/developersIndia was picked-up by the volunteer team to be part of our curated list of 100+ amazing discussing in the community.\n
+It looks like one of your [posts]({post_link}) on r/developersIndia was picked-up by the volunteer team to be part of our curated list of 100+ amazing discussing in the community.\n
 
-You can find your post in our [Community Threads Collection](https://reddit.com/r/developersIndia/wiki/community-threads).\n
+- You can find your post in our [Community Threads Collection](https://reddit.com/r/developersIndia/wiki/community-threads). Feel free to share the collection with your dev friends.\n
+- We post a compilation of these threads every month in [Community Roundups](https://www.reddit.com/r/developersIndia/?f=flair_name%3A%22Community%20Roundup%22). Stay tuned for the next one!\n
 
-Feel free to share the collection with your friends and let them know about the amazing discussions happening in our community.\n
+> PS: This was an automated messaage, no need to reply. [Reach out to mods](https://www.reddit.com/message/compose?to=/r/developersIndia) if you have any questions.
 
-PS: This was an automated messaage, no need to reply. [Reach out to mods](https://www.reddit.com/message/compose?to=/r/developersIndia) if you have any questions.
-
-Namaste & Keep contributing 🙏
+Cheers,\n
+The r/developersIndia Community Team
 """
     reddit.redditor(username).message(
         subject=message_subject, message=message_text.format(post_link=post_link), from_subreddit=reddit.subreddit(sub)

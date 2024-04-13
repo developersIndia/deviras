@@ -143,6 +143,7 @@ def main():
 
     new_post = get_post_data(reddit, args.post_url)
     if new_post["id"] not in saved_collection_ids:
+        new_post["title"] = new_post["title"].strip()
         posts.append(new_post)
         posts = sorted(posts, key=lambda k: k["created_at"])
 

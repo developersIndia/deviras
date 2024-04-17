@@ -1,0 +1,12 @@
+# This is the file contains the required tokens.
+
+# DISCORD BOT TOKEN
+# MUST HAVE PERMISSIONS TO CREATE EVENTS & MANAGE EVENTS
+# https://discord.com/developers/applications
+
+DISCORD_BOT_TOKEN = "TOKEN"
+
+# DISCORD SERVER ID (GUILD ID)
+# developersIndia => 1229786646468362260
+
+DISCORD_GUILD_ID = 1229786646468362260

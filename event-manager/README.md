@@ -23,7 +23,7 @@ This script creates events across -
 
    3.2 Guild ID [`DISCORD_GUILD_ID`] (developersIndia => `1229786646468362260`)
 
-   3.3 Calender Id ['GOOGLE_CALENDER_ID'] (developerIndia => `9f1337e4154910eb1bdb3bfac32b88f69546468b1281a6db58f50a909df5049f@group.calendar.google.com`)
+   3.3 Calender Id [`GOOGLE_CALENDER_ID`] (developerIndia => `9f1337e4154910eb1bdb3bfac32b88f69546468b1281a6db58f50a909df5049f@group.calendar.google.com`)
 
 4. Connect Google Calender through [Google cloud Console](https://console.cloud.google.com/)
 

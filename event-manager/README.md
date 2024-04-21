@@ -8,19 +8,22 @@
 This script creates events across -
 1. [Google Calendar](https://developersindia.in/events-calendar/)  
 2. [Discord](https://discord.com/channels/669880381649977354/)
+
 ---
 
 ### FIRST TIME SETUP
 
 1. Get Python3 `sudo apt-get install python3 && python3 --version`
 
-2. Install required packages `pip install -r packages.txt`
+2. Install required packages `pip install -r requirements.txt`
 
 3. Add respective tokens in the `.env` file
 
-   3.1 Discord Bot token (Get it from [Discord Developers portal](https://discord.com/developers/applications/)) (bot must have MANAGE_EVENT & CREATE_EVENT permission)
+   3.1 Discord Bot token [`DISCORD_BOT_TOKEN`] (Get it from [Discord Developers portal](https://discord.com/developers/applications/)) (bot must have MANAGE_EVENT & CREATE_EVENT permission)
 
-   3.2 Guild ID (developersIndia => 1229786646468362260)
+   3.2 Guild ID [`DISCORD_GUILD_ID`] (developersIndia => `1229786646468362260`)
+
+   3.3 Calender Id ['GOOGLE_CALENDER_ID'] (developerIndia => `9f1337e4154910eb1bdb3bfac32b88f69546468b1281a6db58f50a909df5049f@group.calendar.google.com`)
 
 4. Connect Google Calender through [Google cloud Console](https://console.cloud.google.com/)
 

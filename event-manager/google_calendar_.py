@@ -1,19 +1,13 @@
 import os.path
-import event_details as main
-
-from dotenv import load_dotenv
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
-load_dotenv()
-calendar_id = os.getenv('GOOGLE_CALENDAR_ID')
-
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
-def create_event(name, description, location, date, start_time, end_time):
+def create_google_calendar_event(calendar_id, name, description, location, date, start_time, end_time):
 
     creds = None
 
@@ -54,13 +48,11 @@ def create_event(name, description, location, date, start_time, end_time):
         
         event = service.events().insert(calendarId=calendar_id, body=event).execute()
         
-        print('Google Calender: %s' % (event.get('htmlLink')))
+        print('Google calendar: %s' % (event.get('htmlLink')))
         return event
     
     except Exception as e:
         print(e)
         return None
                                                                                                                                                                                                                                                                                                                          
-create_event(main.EVENT_NAME, main.EVENT_DESCRIPTION, main.EVENT_LOCATION, main.EVENT_DATE, main.EVENT_START_TIME, main.EVENT_END_TIME)
-
 # END

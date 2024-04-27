@@ -88,6 +88,16 @@ def get_announcement_posts(subreddit):
     return get_posts_by_flair(subreddit, flair["flair_text"])
 
 
+def code_collaboration_posts(subreddit):
+    flair = next(
+        filter(
+            lambda flair: "Code Collab" in flair["flair_text"],
+            subreddit.flair.link_templates.user_selectable(),
+        )
+    )
+
+    return get_posts_by_flair(subreddit, flair["flair_text"])
+
 def get_gist_content(gist_id):
     headers = {
         "Authorization": f"token {token}",
@@ -125,6 +135,7 @@ def create_community_roundup_post(
     weekly_discussion_posts,
     ama_posts,
     announcement_posts,
+    collab_posts,
 ):
     flair = next(
         filter(
@@ -145,21 +156,21 @@ The collection is curated by our volunteer team & is independent of the number o
 """
 
     if len(announcement_posts) > 0:
-        text = "## Announcements\n||\n|--------|\n"
+        text = "## Announcements\n|Announcements from volunteer team|\n|--------|\n"
         for post in announcement_posts:
-            text += f"| [**{post.title}**]({post.url}) |\n"
+            text += f"| [**{post.title.strip()}**]({post.url}) |\n"
     else:
         print("No announcements found. Skipping")
 
     if len(ama_posts) > 0:
-        text += "\n## AMAs\n||\n|--------|\n"
+        text += "\n## AMAs\n|Read insights from guests that joined us for a day |\n|--------|\n"
         for post in ama_posts:
-            text += f"| [**{post.title}**]({post.url}) |\n"
+            text += f"| [**{post.title.strip()}**]({post.url}) |\n"
     else:
         print("No AMAs found. Skipping")
 
     if len(posts) > 0:
-        text += "\n## Community Threads\n|S.No|Discussions started by members|\n|--------|--------|\n"
+        text += "\n## Community Threads\n|S.No|Insightful discussions started by community members|\n|--------|--------|\n"
         posts_counter = 0
         for post in posts:
             posts_counter += 1
@@ -168,16 +179,23 @@ The collection is curated by our volunteer team & is independent of the number o
         print("No posts found in the collection for this month. Skipping")
 
     if len(weekly_discussion_posts) > 0:
-        text += "\n## Weekly Discussions\n|Started by Volunteer/Mod Team|\n|--------|\n"
+        text += "\n## Weekly Discussions\n|Weekly tech discussions started by Volunteer Team|\n|--------|\n"
         for post in weekly_discussion_posts:
-            text += f"| [**{post.title}**]({post.url}) |\n"
+            text += f"| [**{post.title.strip()}**]({post.url}) |\n"
     else:
         print("No weekly discussions found. Skipping")
+    
+    if len(collab_posts) > 0:
+        text += "\n## Code Collab\n|Folks looking for collaborations on hackathons, projects etc.|\n|--------|\n"
+        for post in collab_posts:
+            text += f"| [**{post.title.strip()}**]({post.url}) |\n"
+    else:
+        print("No Code Collaboration posts found. Skipping")
 
     if len(i_made_this_posts) > 0:
-        text += "\n## I Made This\n|Top 10 posts|\n|--------|\n"
+        text += "\n## I Made This\n|Top 10 projects built by community members|\n|--------|\n"
         for post in i_made_this_posts:
-            text += f"| [**{post.title}**]({post.url}) |\n"
+            text += f"| [**{post.title.strip()}**]({post.url}) |\n"
     else:
         print("No I Made This posts found. Skipping")
 
@@ -213,8 +231,9 @@ def main():
         weekly_discussion_posts = get_weekly_discussion_posts(subreddit)
         ama_posts = get_ama_posts(subreddit)
         announcement_posts = get_announcement_posts(subreddit)
+        collab_posts = code_collaboration_posts(subreddit)
         create_community_roundup_post(
-            subreddit, posts, i_made_this_posts, weekly_discussion_posts, ama_posts, announcement_posts
+            subreddit, posts, i_made_this_posts, weekly_discussion_posts, ama_posts, announcement_posts, collab_posts
         )
         print("Community Roundup post created successfully!")
     else:

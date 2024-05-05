@@ -21,11 +21,9 @@ def get_input():
 EVENT_NAME, EVENT_DESCRIPTION, EVENT_LOCATION, EVENT_DATE, EVENT_START_TIME, EVENT_END_TIME = get_input()
 
 # Execute create_discord_event
-from discord_ import create_discord_event
+from discord_bot import create_discord_event
 create_discord_event(bot_token, guild_id, EVENT_NAME, EVENT_DESCRIPTION, EVENT_LOCATION, EVENT_DATE, EVENT_START_TIME, EVENT_END_TIME)
 
 # Execute google_calendar_event
-from google_calendar_ import create_google_calendar_event
+from google_calendar import create_google_calendar_event
 create_google_calendar_event(calendar_id, EVENT_NAME, EVENT_DESCRIPTION, EVENT_LOCATION, EVENT_DATE, EVENT_START_TIME, EVENT_END_TIME)
-
-# END

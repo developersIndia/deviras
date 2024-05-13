@@ -14,7 +14,7 @@ def create_discord_event(
     EVENT_END_TIME,
 ):
 
-    bot = commands.Bot(command_prefix="!", intents=discord.Intents.all())
+    bot = commands.Bot(command_prefix="!", intents=discord.Intents.default())
 
     @bot.event
     async def on_ready():
@@ -46,7 +46,7 @@ def create_discord_event(
                 location=EVENT_LOCATION,
                 privacy_level=discord.PrivacyLevel.guild_only,
             )
-            print("Discord Event: ", event.url)
+            print("Discord Event created: ", event.url)
 
         except Exception as e:
             print(e)

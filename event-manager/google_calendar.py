@@ -50,7 +50,7 @@ def create_google_calendar_event(
 
         event = service.events().insert(calendarId=calendar_id, body=event).execute()
 
-        print("Google calendar: %s" % (event.get("htmlLink")))
+        print("Calendar event created: %s" % (event.get("htmlLink")))
         return event
 
     except Exception as e:

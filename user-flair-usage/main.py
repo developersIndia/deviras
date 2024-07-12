@@ -75,7 +75,7 @@ old_flairs_total_count = sum(old_available_flair_count.values())
 # print(f"Total count of user-flairs: {total_count + emoji_flair_count + old_flairs_total_count}")
 
 data = {
-    'Users with un-supported (old) text flairs': f"**{old_flairs_total_count}**",
+    'Users with custom text flairs': f"**{old_flairs_total_count}**",
     'Users with supported text flairs': f"**{total_count}**",
     'Users with emoji only flairs': f"**{emoji_flair_count}**",
     'Total count of user-flairs': f"**{total_count + emoji_flair_count + old_flairs_total_count}**"

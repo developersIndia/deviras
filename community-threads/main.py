@@ -52,9 +52,8 @@ Hi there,\n
 It looks like one of your [posts]({post_link}) on r/developersIndia was picked-up by the volunteer team to be part of our curated list of 100+ amazing discussing in the community.\n
 
 - You can find your post in our [Community Threads Collection](https://reddit.com/r/developersIndia/wiki/community-threads). Feel free to share the collection with your dev friends.\n
-- We post a compilation of these threads every month in [Community Roundups](https://www.reddit.com/r/developersIndia/?f=flair_name%3A%22Community%20Roundup%22). Stay tuned for the next one!\n
+- We post a compilation of these threads every month-end in [Community Roundups](https://www.reddit.com/r/developersIndia/?f=flair_name%3A%22Community%20Roundup%22). Stay tuned for the next one!\n
 
-> PS: This was an automated messaage, no need to reply. [Reach out to mods](https://www.reddit.com/message/compose?to=/r/developersIndia) if you have any questions.
 
 Cheers,\n
 The r/developersIndia Community Team

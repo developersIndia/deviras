@@ -27,7 +27,7 @@ def get_posts_by_flair(subreddit, flair):
     posts = []
     for post in subreddit.search(f'flair_name:"{flair}"', time_filter="month"):
         post_date = datetime.datetime.fromtimestamp(post.created_utc)
-        if post_date.year == current_year and post_date.month == current_month:
+        if post_date.year == current_year and post_date.month == current_month and post.selftext != '[deleted]':
             post.title = post.title.replace("|", "\\|")  # Escape the "|" character
             posts.append(post)
 
@@ -74,7 +74,7 @@ def get_i_made_this_posts(subreddit):
     )
 
     # Return only the top 10 posts
-    return posts[:10]
+    return posts[:20]
 
 
 def get_announcement_posts(subreddit):
@@ -193,7 +193,8 @@ The collection is curated by our volunteer team & is independent of the number o
         print("No Code Collaboration posts found. Skipping")
 
     if len(i_made_this_posts) > 0:
-        text += "\n## I Made This\n|Top 10 projects built by community members|\n|--------|\n"
+        text += "\n## I Made This\nFind more projects & builders on our [Showcase Sunday Megathreads](https://www.reddit.com/r/developersIndia/?f=flair_name%3A%22Showcase%20Sunday%20%3Asnoo_hearteyes%3A%22)\n"
+        text += "|Top 20 projects built by community members|\n|--------|\n"
         for post in i_made_this_posts:
             text += f"| [**{post.title.strip()}**]({post.url}) |\n"
     else:

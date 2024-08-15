@@ -73,7 +73,7 @@ def get_post_data(reddit, post_url):
             submission.created_utc
         ).isoformat(),
         "flair_text": submission.link_flair_text,
-        "author": submission.author.name,
+        "author": submission.author.name if submission.author else "",
     }
     return post
 

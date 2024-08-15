@@ -154,8 +154,12 @@ def main():
         update_gist(gist_id, "collection.json", json.dumps(collection_json, indent=4))
         print("Internal database updated successfully!")
         update_wiki(reddit, "community-threads", posts)
-        send_message(reddit, new_post["author"], new_post["url"])
-        print("Message sent to the author!")
+        if new_post["author"]:
+            send_message(reddit, new_post["author"], new_post["url"])
+            print("Message sent to the author!")
+        else:
+            print("Author username is empty. No message sent.")
+
     else:
         print("Post is already in the collection. No changes were made.")
 

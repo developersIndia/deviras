@@ -193,7 +193,7 @@ The collection is curated by our volunteer team & is independent of the number o
         print("No Code Collaboration posts found. Skipping")
 
     if len(i_made_this_posts) > 0:
-        text += "\n## I Made This\nFind more projects & builders on our [Showcase Sunday Megathreads](https://www.reddit.com/r/developersIndia/?f=flair_name%3A%22Showcase%20Sunday%20%3Asnoo_hearteyes%3A%22)\n"
+        text += "\n## I Made This\n\nFind more projects & builders on our [Showcase Sunday Megathreads](https://www.reddit.com/r/developersIndia/?f=flair_name%3A%22Showcase%20Sunday%20%3Asnoo_hearteyes%3A%22)\n\n"
         text += "|Top 20 projects built by community members|\n|--------|\n"
         for post in i_made_this_posts:
             text += f"| [**{post.title.strip()}**]({post.url}) |\n"

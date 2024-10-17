@@ -23,13 +23,13 @@ class Config:
     SUBREDDIT = "developersindia"
 
     POST_FLAIR = "Hiring"
-    POST_TITLE = f"Don't Miss Out on These Job Opportunities | Weekly Job Openings Thread | {strftime(STRFTIME_FORMAT)}"
+    POST_TITLE = f"Don't Miss Out on These Job Opportunities | Job Openings Mega-thread | {strftime(STRFTIME_FORMAT)}"
     POST_TEXT = """\
-This thread has all the latest job openings that haven't been posted on previous weekly threads.
+This thread has all the latest job openings that haven't been posted on previous hiring mega threads.
 
-If you have a job opening that you'd like to share with the community, you can post it using this link:- https://developersindia.in/post-a-job/
-
-For all the available job openings, check out the Job Board at:- https://developersindia.in/job-board/
+- If you have a job opening that you'd like to share with the community, you can post it using [this link](https://developersindia.in/post-a-job/).
+- For all the available job openings, check out our [Job Board](https://developersindia.in/job-board/).
+- If you are looking for work, consider participating in our monthly ["Hire Me" megathreads](https://www.reddit.com/r/developersIndia/?f=flair_name%3A%22Hire%20Me%22).
 
 Stay tuned for updates on the latest job openings, and apply for the ones that interest you. Wishing you the best of luck in your job search!\
 """

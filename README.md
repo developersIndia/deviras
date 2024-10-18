@@ -21,7 +21,7 @@
 
 ### [community-threads](https://github.com/developersIndia/deviras/blob/main/community-threads/main.py)
 
-- Used for grabbing the posts from [community threads collection](https://www.reddit.com/r/developersIndia/collection/958aef35-f9cb-414d-ab33-08bc639e47de/) and adding it to the [wiki](https://www.reddit.com/r/developersIndia/wiki/community-threads/).
+- Add a post to [community threads wiki](https://www.reddit.com/r/developersIndia/wiki/community-threads/).
 - ![action build](https://github.com/developersIndia/deviras/actions/workflows/collection-thread-updater.yml/badge.svg)
 
 ### [job-thread](https://github.com/developersIndia/deviras/blob/main/job-thread/main.py)

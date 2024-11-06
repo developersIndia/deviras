@@ -22,12 +22,12 @@ def send_message(reddit, username):
     message_subject = 'Woohoo! Your advice/perspective is now part of our wiki!'
     message_text = """
 Hi there,\n
-It looks like one of your comments on r/developersIndia was picked-up by the volunteer team to be part of our [community-driven wiki](https://wiki.developersindia.in/).\n
+It looks like one of your comments on r/developersIndia was picked-up by the volunteer team to be part of our **[community-driven wiki](https://wiki.developersindia.in/)**.\n
 
-- You can find your advice by searching your username in our [Wiki](https://wiki.developersindia.in/).\n
+- You can find your contribution by searching your username in the [Wiki](https://wiki.developersindia.in/).\n
 - We can't thank you enough for your valuable contribution to our community 🧡\n\n
 
-Please keep contributing productively!\n
+Please keep contributing productively. If you have any questions/concerns feel free to reply to this mail or create a new modmail.\n\n
 
 Cheers,\n
 The r/developersIndia Community Team

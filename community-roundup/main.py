@@ -144,7 +144,7 @@ def create_community_roundup_post(
         )
     )
 
-    title = "Community Roundup: List of must read posts & interesting discussions that happened in {month} {year}".format(
+    title = "Community Roundup: List of interesting discussions that happened in {month} {year}".format(
         month=datetime.date.today().strftime("%B"), year=datetime.date.today().year
     )
 

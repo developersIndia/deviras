@@ -6,20 +6,21 @@ client_id = os.environ["REDDIT_CLIENT_ID"]
 client_secret = os.environ["REDDIT_CLIENT_SECRET"]
 reddit_pass = os.environ["REDDIT_PASSWORD"]
 username = os.environ["REDDIT_USERNAME"]
-user_agent = 'AdventOfCode Leaderboard Updater (by https://github.com/ni5arga/)'
+user_agent = 'AdventOfCode Leaderboard Updater - developersIndia'
 aoc_session_cookie = os.environ["AOC_SESSION_COOKIE"]
 aoc_leaderboard_code = os.environ["AOC_LEADERBOARD_CODE"]
+aoc_year = os.environ.get("AOC_YEAR")
 reddit_post_id = os.environ.get("REDDIT_POST_ID")
 
 aoc_url = f'https://adventofcode.com/{{year}}/leaderboard/private/view/{aoc_leaderboard_code}.json'
 
 def get_leaderboard_data():
-    response = requests.get(aoc_url.format(year=2023), cookies={'session': aoc_session_cookie})
+    response = requests.get(aoc_url.format(year=aoc_year), cookies={'session': aoc_session_cookie})
     data = response.json()
     return data
 
 def format_leaderboard(data, num_players=100):
-    leaderboard_stats = "r/developersIndia Advent of Code Leaderboard Stats\n\n"
+    leaderboard_stats = f"r/developersIndia Advent of Code {aoc_year} - Leaderboard\n\n"
     leaderboard_stats += "| Rank | Player | Stars | Score |\n"
     leaderboard_stats += "|------|--------|-------|-------|\n"
 
@@ -32,7 +33,7 @@ def format_leaderboard(data, num_players=100):
         if member_data['local_score'] > 0:
             leaderboard_stats += f"| {i + 1} | {member_data['name']} | {member_data['stars']} | {member_data['local_score']} |\n"
 
-    leaderboard_stats += f"\n[Advent of Code Leaderboard](https://adventofcode.com/2023/leaderboard/private/view/{aoc_leaderboard_code})\n"
+    leaderboard_stats += f"\n[Advent of Code Leaderboard](https://adventofcode.com/{aoc_year}/leaderboard/private/view/{aoc_leaderboard_code})\n"
     leaderboard_stats += f"\nUpdated every 24 hours"
 
     return leaderboard_stats

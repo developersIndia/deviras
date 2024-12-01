@@ -33,7 +33,6 @@ def format_leaderboard(data, num_players=100):
         if member_data['local_score'] > 0:
             leaderboard_stats += f"| {i + 1} | {member_data['name']} | {member_data['stars']} | {member_data['local_score']} |\n"
 
-    leaderboard_stats += f"\n[Advent of Code Leaderboard](https://adventofcode.com/{aoc_year}/leaderboard/private/view/{aoc_leaderboard_code})\n"
     leaderboard_stats += f"\nUpdated every 24 hours"
 
     return leaderboard_stats

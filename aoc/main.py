@@ -10,9 +10,9 @@ user_agent = 'AdventOfCode Leaderboard Updater - developersIndia'
 aoc_session_cookie = os.environ["AOC_SESSION_COOKIE"]
 aoc_leaderboard_code = os.environ["AOC_LEADERBOARD_CODE"]
 aoc_year = os.environ.get("AOC_YEAR")
-reddit_post_id = os.environ.get("REDDIT_POST_ID")
+reddit_post_id = os.environ.get("AOC_LEADERBOARD_REDDIT_POST_ID")
 
-aoc_url = f'https://adventofcode.com/{{year}}/leaderboard/private/view/{aoc_leaderboard_code}.json'
+aoc_url = f'https://adventofcode.com/{aoc_year}/leaderboard/private/view/{aoc_leaderboard_code}.json'
 
 def get_leaderboard_data():
     response = requests.get(aoc_url.format(year=aoc_year), cookies={'session': aoc_session_cookie})
@@ -44,7 +44,7 @@ def update_reddit_post(reddit, post_id, new_stats):
 
 def main():
     if not reddit_post_id:
-        print("Please set the REDDIT_POST_ID environment variable.")
+        print("Please set the AOC_LEADERBOARD_REDDIT_POST_ID environment variable.")
         return
 
     reddit = praw.Reddit(
@@ -56,9 +56,7 @@ def main():
     )
 
     leaderboard_data = get_leaderboard_data()
-
     formatted_stats = format_leaderboard(leaderboard_data)
-
     update_reddit_post(reddit, reddit_post_id, formatted_stats)
 
 if __name__ == "__main__":

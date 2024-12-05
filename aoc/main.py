@@ -31,6 +31,10 @@ def format_leaderboard(data, num_players=100):
     for i, member_data in enumerate(sorted_members[:num_players]):
         # check for non-zero local_score
         if member_data['local_score'] > 0:
+            # if member's name is null, use the member_id
+            if member_data['name'] == None:
+                member_data['name'] = f"Anonymous #{member_data['id']}"
+
             leaderboard_stats += f"| {i + 1} | {member_data['name']} | {member_data['stars']} | {member_data['local_score']} |\n"
 
     leaderboard_stats += f"\nUpdated every 24 hours"
@@ -56,7 +60,8 @@ def main():
 
     leaderboard_data = get_leaderboard_data()
     formatted_stats = format_leaderboard(leaderboard_data)
-    update_reddit_post(reddit, reddit_post_id, formatted_stats)
+    print(formatted_stats)
+    # update_reddit_post(reddit, reddit_post_id, formatted_stats)
 
 if __name__ == "__main__":
     main()

@@ -61,7 +61,7 @@ def main():
     leaderboard_data = get_leaderboard_data()
     formatted_stats = format_leaderboard(leaderboard_data)
     print(formatted_stats)
-    # update_reddit_post(reddit, reddit_post_id, formatted_stats)
+    update_reddit_post(reddit, reddit_post_id, formatted_stats)
 
 if __name__ == "__main__":
     main()

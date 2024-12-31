@@ -154,6 +154,7 @@ def create_community_roundup_post(
 **Community Roundup is posted on the last day of each month. To explore a compilation of all interesting posts and community threads over time, [visit our wiki](https://www.reddit.com/r/developersIndia/wiki/community-threads/).**\n
 The collection is curated by our volunteer team & is independent of the number of upvotes and comments (except for "I made This" posts). If you believe we may have overlooked any engaging posts or discussions, please share them with us via [modmail](https://reddit.com/message/compose?to=r/developersIndia&subject=Community%20Threads%20Collection%20Suggestion&message=Hey%20folks%2C%0A%0A%3Cpost%20link%3E).\n
 """
+    text = ""
 
     if len(announcement_posts) > 0:
         text = "## Announcements\n|Announcements from volunteer team|\n|--------|\n"
